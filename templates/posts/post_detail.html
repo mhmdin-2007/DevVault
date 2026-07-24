@@ -225,9 +225,10 @@
                 {% if user.is_authenticated and user != post.author %}
                     <form method="post" action="{% url 'interactions:follow_toggle' post.author.id %}">
                         {% csrf_token %}
-                        <button type="submit" class="btn btn-primary btn-sm">
-                            <i class="fas fa-user-plus"></i> 
-                            {% if user in post.author.followers.all %}Unfollow{% else %}Follow{% endif %}
+                        <button type="submit" class="btn btn-sm 
+                            {% if is_following_author %}btn-outline-danger{% else %}btn-primary{% endif %}">
+                            <i class="fas {% if is_following_author %}fa-user-minus{% else %}fa-user-plus{% endif %}"></i> 
+                            {% if is_following_author %}Unfollow{% else %}Follow{% endif %}
                         </button>
                     </form>
                 {% endif %}

@@ -9,7 +9,7 @@ from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.models import User
-# posts/views.py
+from interactions.models import Follow
 
 class PostListView(ListView):
     """
@@ -221,6 +221,11 @@ class PostDetailView(DetailView):
                 user=self.request.user,
                 content_type=content_type,
                 object_id=self.object.id
+            ).exists()
+
+            context['is_following_author'] = Follow.objects.filter(
+                follower=self.request.user,
+                following=self.object.author
             ).exists()
 
         return context
