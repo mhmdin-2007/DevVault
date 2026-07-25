@@ -1,10 +1,8 @@
 from django import forms
 from .models import Comment, Answer
 
-class CommentForm():
-    """
-    From for adding comments with optional reply.
-    """
+class CommentForm(forms.ModelForm):
+    """From for adding comments with optional reply."""
     class Meta:
         model = Comment
         fields = ['content']
@@ -19,7 +17,7 @@ class CommentForm():
             'content': 'Comment',
         }
 
-class AnswerForm():
+class AnswerForm(forms.ModelForm):
     """ Form for answering interview questions with file upload. """
 
     class Meta:
