@@ -49,7 +49,7 @@ def like_toggle(request, content_type_id, object_id):
     else:
         messages.info(request, 'Like removed.')
     
-    return redirect('posts:post_detali', slug=content_object.slug)
+    return redirect('posts:post_detail', slug=content_object.slug)
 
 @login_required
 @require_POST
@@ -62,7 +62,7 @@ def add_comment(request, content_type_id, object_id):
     content_type = get_object_or_404(ContentType, id=content_type_id)
     content_object = content_type.get_object_for_this_type(id = object_id)
 
-    form = CommentForm(request.Post)
+    form = CommentForm(request.POST)
 
     if form.is_valid():
         comment = form.save(commit=False)
@@ -91,7 +91,7 @@ def vote_toggle(request, content_type_id, object_id):
     """
 
     content_type = get_object_or_404(ContentType, id=content_type_id)
-    content_object = content_type.get_all_objects_for_this_type(id=object_id)
+    content_object = content_type.get_objects_for_this_type(id=object_id)
 
     vote_type = request.POST.get('vote_type')
     if vote_type not in ['1', '-1']:
@@ -101,7 +101,7 @@ def vote_toggle(request, content_type_id, object_id):
     vote_type = int(vote_type)
 
     #Check if user already voted
-    existing_vote = Vote.object.filter(
+    existing_vote = Vote.objects.filter(
         user = request.user,
         content_type=content_type,
         object_id=object_id
@@ -134,10 +134,10 @@ def vote_toggle(request, content_type_id, object_id):
 def bookmark_toggle(request, content_type_id, object_id):
     """ Toggle bookmark on any content."""
 
-    content_type = get_object_or_404(request, id=content_type_id)
+    content_type = get_object_or_404(ContentType, id=content_type_id)
     content_object = content_type.get_object_for_this_type(id=object_id)    
     
-    bookmark, created = Bookmark.object.get_or_create(
+    bookmark, created = Bookmark.objects.get_or_create(
         user= request.user,
         content_type=content_type,
         object_id=object_id
@@ -186,7 +186,7 @@ def answer_create(request, post_slug):
 
     if request.method == 'POST':
         form = AnswerForm(request.POST, request.FILES)
-        if form.is_vaild():
+        if form.is_valid():
             answer = form.save(commit=False)
             answer.post = post
             answer.author = request.user
@@ -197,12 +197,12 @@ def answer_create(request, post_slug):
         else:
             form = AnswerForm()
         
-        context = {
-            'form': form,
-            'post': post,
-        }
+    context = {
+        'form': form,
+        'post': post,
+    }
 
-        return render(request, 'interactions/answer_form.html', context)
+    return render(request, 'interactions/answer_form.html', context)
     
 @login_required
 @require_POST
