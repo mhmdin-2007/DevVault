@@ -1,4 +1,4 @@
-# 🚀 DevVault
+# DevVault
 
 > **A community-driven platform for software engineers to share interview questions, algorithm challenges, and technical experiences.**
 
@@ -11,7 +11,7 @@
 
 ---
 
-## 📖 Table of Contents
+## Table of Contents
 
 - [About The Project](#-about-the-project)
 - [Key Features](#-key-features)
@@ -29,36 +29,36 @@
 
 ---
 
-## 📝 About The Project
+## About The Project
 
 **DevVault** is a community platform where software engineers can:
 
-- 📝 Share **interview questions** from real companies (Google, Amazon, Snapp, etc.)
-- 🧠 Post **algorithm challenges** and technical problems
-- 💬 **Answer questions** and get accepted by the post author
-- 👍 **Vote** on useful content (upvote/downvote)
-- 🔖 **Bookmark** favorite posts for later
-- 👥 **Follow** other developers and build your network
-- 📚 **Write articles** and share knowledge
+- Share **interview questions** from real companies (Google, Amazon, Snapp, etc.)
+-  Post **algorithm challenges** and technical problems
+-  **Answer questions** and get accepted by the post author
+-  **Vote** on useful content (upvote/downvote)
+-  **Bookmark** favorite posts for later
+-  **Follow** other developers and build your network
+-  **Write articles** and share knowledge
 
 Think of it as a **hybrid** between Stack Overflow, GitHub, and Reddit — but specialized for interview preparation and technical learning.
 
 ---
 
-## ✨ Key Features
+##  Key Features
 
-### 🔐 Authentication & Profiles
+###  Authentication & Profiles
 - User registration and login with validation
 - Profile management with avatar, bio, and social links
 - Follow/unfollow system
 
-### 📝 Content Management
+###  Content Management
 - Multiple post types: **Social**, **Interview**, **Article**
 - Rich content with images and videos
 - Tag and company categorization
 - Slug-based URLs for SEO
 
-### 💬 Interactions
+###  Interactions
 - **Likes** on any content (posts, answers)
 - **Comments** with nested replies (threaded comments)
 - **Voting** (upvote/downvote) on posts
@@ -66,12 +66,12 @@ Think of it as a **hybrid** between Stack Overflow, GitHub, and Reddit — but s
 - **Answers** to interview questions with file upload (`.cpp`, `.py`, etc.)
 - **Answer acceptance** by post author
 
-### 🔍 Search & Filters
+###  Search & Filters
 - Full-text search on titles and content
 - Filter by post type, category, difficulty, company, and tags
 - Pagination for large result sets
 
-### 🐳 Docker Support
+###  Docker Support
 - Fully containerized with Docker and Docker Compose
 - PostgreSQL as production database
 - Persistent volumes for data safety
@@ -79,7 +79,7 @@ Think of it as a **hybrid** between Stack Overflow, GitHub, and Reddit — but s
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 ### Backend
 | Technology | Version | Purpose |
@@ -106,7 +106,7 @@ Think of it as a **hybrid** between Stack Overflow, GitHub, and Reddit — but s
 
 ---
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 
@@ -117,7 +117,7 @@ Think of it as a **hybrid** between Stack Overflow, GitHub, and Reddit — but s
 
 ---
 
-### 📦 Installation with Docker (Recommended)
+###  Installation with Docker (Recommended)
 
 The easiest way to get started:
 
