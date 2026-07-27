@@ -142,3 +142,6 @@ MEDIA_URL = '/media/'
 
 #for docker
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0']
+
+#if the user has logged in, they will be redirected to following page; 
+LOGIN_REDIRECT_URL = 'posts:home'
