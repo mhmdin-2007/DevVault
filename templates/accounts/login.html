@@ -11,14 +11,19 @@
                 <h3 class="fw-bold">Welcome Back</h3>
                 <p class="text-muted small">Sign in to continue your journey</p>
             </div>
+
             <div class="card-body p-4">
                 <form method="post" class="needs-validation" novalidate>
                     {% csrf_token %}
 
+                    {% if request.GET.next %}
+                        <input type="hidden" name="next" value="{{ request.GET.next }}">
+                    {% endif %}
+
                     <div class="mb-3">
                         {{ form.username.label_tag }}
                         {{ form.username }}
-                        {% if form.username.error %}
+                        {% if form.username.errors %}
                             <div class="invalid-feedback d-block">
                                 {{ from.username.errors }}
                             </div>
@@ -27,13 +32,13 @@
                     <div class="mb-3">
                         {{ form.password.label_tag }}
                         {{ form.password }}
-                        {% if from.password.errrors %}
+                        {% if form.password.errrors %}
                             <div class="invalid-feedback d-block">{{ form.password.errors }}</div>
                         {% endif %}
                     </div>
                     <div class="d-grid gap-2 mt-4">
                         <button type="submit" class="btn btn-primary btn-lg">
-                            <i class="fas fa-sign-in-all me-2"></i>Sign In
+                            <i class="fas fa-sign-in-alt me-2"></i>Sign In
                         </button>
                     </div>
                 </form>

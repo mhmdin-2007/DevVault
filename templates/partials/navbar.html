@@ -25,7 +25,7 @@
                     </li>
                 {% else %}
                     <li class="nav-item">
-                        <a href="{% url 'accounts:login' %}" class="btn btn-outline-light btn-sm">
+                        <a href="{% url 'accounts:login' %}?next={{ requests.path }}" class="btn btn-outline-light btn-sm">
                             <i class="fas fa-sign-in-alt me-1"></i>Login
                         </a>
                     </li>
