@@ -9,7 +9,6 @@ from django.contrib import messages
 from .forms import CommentForm, AnswerForm
 from posts.models import Post
 from django.contrib.auth.models import User
-
 @login_required
 @require_POST
 def like_toggle(request, content_type_id, object_id):
@@ -91,7 +90,7 @@ def vote_toggle(request, content_type_id, object_id):
     """
 
     content_type = get_object_or_404(ContentType, id=content_type_id)
-    content_object = content_type.get_objects_for_this_type(id=object_id)
+    content_object = content_type.get_object_for_this_type(id=object_id)
 
     vote_type = request.POST.get('vote_type')
     if vote_type not in ['1', '-1']:
@@ -118,8 +117,8 @@ def vote_toggle(request, content_type_id, object_id):
             existing_vote.save()
             messages.success(request, "Vote updated!")
     else:
-        #Create new vote
-        Vote.object.create(
+        #create new vote
+        Vote.objects.create(
             user=request.user,
             content_type=content_type,
             object_id=object_id,
@@ -194,8 +193,8 @@ def answer_create(request, post_slug):
             messages.success(request, "Your answer has been submited!")
 
             return redirect('posts:post_detail', slug=post.slug)
-        else:
-            form = AnswerForm()
+    else:
+        form = AnswerForm()
         
     context = {
         'form': form,
@@ -217,7 +216,7 @@ def accept_answer(request, answer_id):
 
     #check if user is the post author
     if request.user != post.author:
-        messages.error(request, "Only the post atuthor can accept answers.")
+        messages.error(request, "Only the post author can accept answers.")
         return redirect('posts:post_detail', slug=post.slug)
 
     #toggle accepted status
