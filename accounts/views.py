@@ -3,7 +3,7 @@ from django.views.generic import CreateView, DetailView, UpdateView
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.contrib.auth import login
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.contrib import messages
 from django.contrib.auth.views import LoginView, LogoutView#ویو های آماده جنگو برای ورود و خروج
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -29,10 +29,17 @@ class ProfileView(DetailView):
         context = super().get_context_data(**kwargs)
         user = self.get_object()
 
-        context['user_posts'] = user.posts.all().order_by('-created_at')
+        from django.core.paginator import Paginator
+        posts = user.posts.all().order_by('-created_at')
+        paginator = Paginator(posts, 10)
+        page_number = self.request.GET.get('page')
+
+        context['user_posts'] = paginator.get_page(page_number)
+
         context['followers_count'] = user.followers.count()
         context['following_count'] = user.following.count()
-
+        context['posts_count'] = user.posts.count()
+        
         #check if current user is following this user
         if self.request.user.is_authenticated and self.request.user != user:
             context['is_following'] = user.followers.filter(
@@ -104,6 +111,15 @@ class CustomLoginview(LoginView):
         '''Add error message on failed login.'''
         messages.error(self.request, "Invalid username or password. Please try again.")
         return super().form_invalid(form)
+    
+    def get_success_url(self):
+        #if there is a 'next' go to that one.
+        next_url = self.request.GET.get('next')
+        if next_url:
+            return next_url
+        
+        #else: go to the home page
+        return reverse('posts:home')
     
 class CustomLogoutView(LogoutView):
     '''Custom logout view with confiramation message.'''
