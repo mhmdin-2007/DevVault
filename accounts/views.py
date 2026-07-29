@@ -30,6 +30,7 @@ class ProfileView(DetailView):
         user = self.get_object()
 
         from django.core.paginator import Paginator
+        
         posts = user.posts.all().order_by('-created_at')
         paginator = Paginator(posts, 10)
         page_number = self.request.GET.get('page')
