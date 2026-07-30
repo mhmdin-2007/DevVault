@@ -17,9 +17,10 @@ class Profile(models.Model):
     bio = models.TextField(blank=True, null=True, verbose_name='Biography')
     github_url = models.URLField(blank=True, null=True, verbose_name='GitHub Profile')
     linkedin_url = models.URLField(blank=True, null=True, verbose_name='LinkedIn Profile')
+
     avatar = models.ImageField(
-        default="media/avatar.jpg",
         upload_to="avatars/",
+        default="avatars/default.jpg",
         blank=True,
         null=True,
         verbose_name='Profile Picture'

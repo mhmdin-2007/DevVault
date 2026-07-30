@@ -60,9 +60,11 @@ class ProfileEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     def get_object(self):
         """Get the profile of the current user."""
         profile, created = Profile.objects.get_or_create(
-            user=self.request.user
+            user=self.request.user,
+            defaults={
+                'avatar': 'avatars/default.jpg'
+            }
         )
-
         return profile
     
     def test_func(self):

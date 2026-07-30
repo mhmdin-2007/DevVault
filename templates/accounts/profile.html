@@ -9,16 +9,18 @@
     <div class="col-lg-4">
         <div class="card shadow-sm">
             <div class="card-body text-center">
-                <!-- Avatar -->
+                <!-- avatar -->
                 {% if profile_user.profile.avatar %}
                     <img src="{{ profile_user.profile.avatar.url }}" 
                          class="rounded-circle img-fluid mb-3" 
                          style="width: 150px; height: 150px; object-fit: cover;">
+
                 {% else %}
                     <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center mx-auto mb-3"
                          style="width: 150px; height: 150px; font-size: 4rem; color: white;">
                         <i class="fas fa-user"></i>
                     </div>
+                    
                 {% endif %}
                 
                 <h4>{{ profile_user.get_full_name|default:profile_user.username }}</h4>

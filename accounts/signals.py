@@ -5,7 +5,7 @@ from .models import Profile
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs) -> None:
-    '''Create a Profile instance when a new User is created.'''
+    '''Create a Profile when a new User is created.'''
     if created:
         Profile.objects.create(user=instance)
 
