@@ -10,4 +10,5 @@ urlpatterns = [
     path('bookmark/<int:content_type_id>/<int:object_id>/', views.bookmark_toggle, name='bookmark_toggle'),
     path('follow/<int:user_id>/', views.follow_toggle, name='follow_toggle'),    path('answer/<slug:post_slug>/', views.answer_create, name='answer_create'),
     path('answer/accept/<int:answer_id>/', views.accept_answer, name='accept_answer'),
+    path('feed/', views.activity_feed, name='activity_feed'),
 ]

@@ -6,7 +6,6 @@
 [![Django Version](https://img.shields.io/badge/django-5.1.4-green.svg)](https://djangoproject.com)
 [![PostgreSQL](https://img.shields.io/badge/postgresql-15+-blue.svg)](https://postgresql.org)
 [![Docker](https://img.shields.io/badge/docker-27+-blue.svg)](https://docker.com)
-[![License](https://img.shields.io/badge/license-MIT-red.svg)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
 
 ---

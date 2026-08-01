@@ -2,13 +2,14 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.contenttypes.models import ContentType
-from .models import Like, Comment, Vote, Bookmark, Follow, Answer
+from .models import Like, Comment, Vote, Bookmark, Follow, Answer, Activity
 from django.db.models import Q
 from django.http import JsonResponse
 from django.contrib import messages
 from .forms import CommentForm, AnswerForm
 from posts.models import Post
 from django.contrib.auth.models import User
+
 @login_required
 @require_POST
 def like_toggle(request, content_type_id, object_id):
@@ -232,3 +233,22 @@ def accept_answer(request, answer_id):
     answer.save()
     return redirect('posts:post_detail', slug=post.slug)
     
+
+@login_required
+def activity_feed(request):
+    """
+    Display activities of followed users.
+    """
+
+    #get users that the current user is following
+    followed_users = request.user.following.all().values_list('following', flat=True)
+
+    activities = Activity.objects.filter(
+        user__in=followed_users
+    ).select_related('user', 'target_user')[:50]
+
+    context = {
+        'activities': activities,
+    }
+
+    return render(request, 'interactions/activity_feed.html', context)
