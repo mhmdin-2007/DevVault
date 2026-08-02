@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}DevVault | Bookmarked{% endblock %}
+
+{% block content%}
+
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-transparent d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">
+                    <i class="fas fa-bookmark text-warning me-2"></i>Saved Posts
+                </h5>
+                <div class="d-flex gap-2">
+                    <a href="{% url 'posts:home' %}" class="btn btn-outline-primary btn-sm d-inline-flex align-items-center">
+                        <i class="fas fa-home me-1"></i> Home
+                    </a>
+                    <a href="{% url 'accounts:profile' user.username %}" class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center">
+                        <i class="fas fa-user-circle me-1"></i>{{ user.username }}
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow-sm">
+            <div class="card-body">
+                {% if bookmarks %}
+                    {% for bookmark in bookmarks%}
+                        {% with post=bookmark.content_object %}
+                            <div class="bookmark-item">
+                                <div class="d-flex justify-content-between align-item-start">
+                                    <h5 class="mb-1">
+                                        <a href="{% url 'posts:post_detail' post.slug %}" class="text-decoration-none">
+                                            {{ post.title }}
+                                        </a>
+                                    </h5>
+                                    <span class="badge bg-secondary">{{ post.get_post_type_display }}</span>
+                                </div>
+                                <p class="text-muted small mb-2">{{ post.content|truncatewords:20 }}</p>
+                                <div class="d-flex gap-3 text-muted small">
+                                    <span><i class="fas fa-heart text-danger"></i> {{ post.likes_count }}</span>
+                                    <span><i class="fas fa-comment"></i> {{ post.comments_count }}</span>
+                                    <span><i class="fas fa-calendar-alt"></i> {{ post.created_at|date:"M d, Y" }}</span>
+                                </div>
+
+                                {% if not forloop.last %}
+                                    <hr class="my-3">
+                                {% endif %}
+                            </div>
+                        {% endwith %}
+                    {% endfor %}
+                {% else %}
+                    <div class="text-center py-5">
+                        <i class="fas fa-bookmark fa-3x text-muted mb-3"><i>
+                        <h5>No saved posts yet</h5>
+                        <p class="text-muted">
+                            Start bookmarking posts you like!
+                        </p>
+                        <a href="{% url 'posts:home' %}" class="btn btn-primary">
+                            <i class="fas fa-home me-1"></i>Browse Post
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
