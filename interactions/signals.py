@@ -20,7 +20,7 @@ def create_like_activity(sender, instance, created, **kwargs):
         #like is on a Post
         if instance.content_type.model == "post":
             Activity.objects.create(
-                user=instance.author,
+                user=instance.user,
                 activity_type=Activity.ActivityType.LIKE,
                 content_object=instance.content_type,
                 object_id= instance.object_id,
