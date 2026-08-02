@@ -13,7 +13,57 @@ from .forms import ProfileForm
 from .models import Profile
 from django.views.generic import ListView
 from django.db.models import Q
+from interactions.models import Bookmark
+from django.views.decorators.csrf import requires_csrf_token
+from django.contrib.auth.decorators import login_required
 
+class BookmarkView(LoginRequiredMixin, ListView):
+    '''
+    Display user's bookmarked posts in more detail. 
+    '''
+    model = Bookmark
+    template_name = 'accounts/bookmarks.html'
+    context_object_name = 'bookmarks'
+    paginate_by = 10
+
+    def get_queryset(self):
+        """Return bookmarks for the current user."""
+        return Bookmark.objects.filter(
+            user=self.request.user
+        ).select_related('user').order_by('-created_at')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        #context['bookmarks'] = self.get_queryset()
+        bookmarked_posts = []
+        for bookmark in context['bookmarks']:
+            if bookmark.content_type:
+                bookmarked_posts.append(bookmark.content_object)
+
+        context['bookmarked_posts'] = bookmarked_posts
+        return context
+    
+# @login_required
+# def user_bookmark(request):
+#     """
+#     Display user's bookmarked posts.
+#     Olny the logged-in usdr can see their own bookmarks.
+#     """
+
+#     bookmarks = Bookmark.objects.filter(
+#         user=request.user,
+#     ).select_related('user').order_by('-created_at')
+
+#     bookmarked_post = [bookmark.content_object for bookmark in bookmarks if bookmark.content_object]
+
+#     context = {
+#         "bookmarked_posts": bookmarked_post,
+#         "bookmarks": bookmarks
+#     }
+
+#     return render(request, 'accounts/bookmarks.html', context=context)
+    
 class ProfileView(DetailView):
     '''Display user profile with thier posts and stats.'''
     model = User
@@ -132,4 +182,3 @@ class CustomLogoutView(LogoutView):
         '''Add info message before logout.'''
         messages.info(request, "you have been succussfully loggedout.")
         return super().dispatch(request, *args, **kwargs)
-    
