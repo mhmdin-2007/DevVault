@@ -59,6 +59,22 @@ class MarkNotificatioinReadView(LoginRequiredMixin, View):
 
         return redirect('interactions:notification_list')
 
+class MarkAllNotificationsRead(LoginRequiredMixin, View):
+    ''''''
+    def post(self, request):
+        updated_count = Notification.objects.filter(
+            user=request.user,
+            is_read=False
+        ).update(is_read=True)
+
+        if updated_count > 0:
+            messages.success(request, f"{updated_count} notification(s) marked as read.")
+        else:
+            messages.error(request, 'No unread notifications to mark.')
+
+        return redirect('interactions:notification_list')
+
+
 @login_required
 @require_POST #use form instead of a tag in templates
 def like_toggle(request, content_type_id, object_id):
