@@ -4,6 +4,47 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
 from posts.models import Post 
 
+class Notification(models.Model):
+    '''
+    Notification model to display users activity on their content.
+    '''
+    class Category(models.TextChoices):
+        POST = 'POST', 'New Post'
+        LIKE = 'LIKE', 'Liked your Post'
+        COMMENT = 'COMMENT', 'Commented on your Post'
+        ANSWER = 'ANSWER', 'Answered your question'
+        FOLLOW = 'FOLLOW', 'Follow You'
+
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='notifications',
+    )
+
+    message = models.CharField(max_length=255)
+    activity = models.CharField(max_length=20, choices=Category.choices)
+    link = models.CharField(max_length=255, blank=True, null=True)
+    is_read = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = 'Notification'
+        verbose_name_plural = 'Notifications'
+        indexes = [
+            models.Index(fields=['user', 'is_read']),
+            models.Index(fields=['created_at']),
+        ]
+
+    def __str__(self):
+        return f"user: {self.user.username} - {self.message[:30]}"
+
+    def mark_as_read(self):
+        """Mark this notification as read."""
+        if not self.is_read:
+            self.is_read = True
+            self.save()
+
 class Like(models.Model):
     '''
     Like any content (post, answer, etc.).
