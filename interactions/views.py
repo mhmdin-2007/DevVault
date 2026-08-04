@@ -2,16 +2,65 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.contenttypes.models import ContentType
-from .models import Like, Comment, Vote, Bookmark, Follow, Answer, Activity
+from .models import Like, Comment, Vote, Bookmark, Follow, Answer, Activity, Notification
 from django.db.models import Q
 from django.http import JsonResponse
 from django.contrib import messages
 from .forms import CommentForm, AnswerForm
 from posts.models import Post
 from django.contrib.auth.models import User
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import ListView, View
+
+class NotificationListView(LoginRequiredMixin, ListView):
+    """
+    Display all notifications for the current user.
+    Newest item come first.
+    Counts the number of unread notifications.
+    """
+    model = Notification
+    template_name = 'interactions/notification_list.html'
+    context_object_name = 'notifications'
+    paginate_by = 10
+
+    def get_queryset(self):
+        return Notification.objects.filter(
+            user=self.request.user,
+        ).order_by('-created_at')
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        unread_count = Notification.objects.filter(
+            user=self.request.user,
+            is_read=False
+        ).count()
+
+        context['unread_count'] = unread_count
+
+        return context
+
+class MarkNotificatioinReadView(LoginRequiredMixin, View):
+    """
+    Mark a single notification as read and redirect to its link.
+    """
+    def get(self, request, notification_id):
+        notificataion = get_object_or_404(
+            Notification, 
+            id=notification_id, 
+            user=request.user
+        )
+
+        notificataion.is_read = True
+        notificataion.save()
+    
+        if notificataion.link:
+            return redirect(notificataion.link)
+
+        return redirect('interactions:notification_list')
 
 @login_required
-@require_POST
+@require_POST #use form instead of a tag in templates
 def like_toggle(request, content_type_id, object_id):
     """
     Toggle like on any content (post, answer, etc.).
