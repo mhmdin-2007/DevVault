@@ -11,14 +11,18 @@
             <ul class="navbar-nav ms-auto align-items-center">
                 {% if user.is_authenticated %}
                     <li class="nav-item">
+                        <a href="{% url 'interactions:notification_list' %}" class="nav-link">
+                            <i class="fas fa-bell"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="{% url 'accounts:profile' user.username %}" class="nav-link text-light">
                             <i class="fas fa-user-circle me-1"></i>{{ user.username }}
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="{% url 'interactions:activity_feed' %}"
-                            class="nav-link text-light"
-                        >
+                            class="nav-link text-light">
                             <i class="fas fa-rss me-1"></i>Feed
                         </a>
                     </li>
