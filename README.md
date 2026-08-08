@@ -1,143 +1,232 @@
 # DevVault
 
-> **A community-driven platform for software engineers to share interview questions, algorithm challenges, and technical experiences.**
+> A community-driven platform for software engineers to share interview questions, algorithm challenges, and technical knowledge.
 
-[![Python Version](https://img.shields.io/badge/python-3.11+-blue.svg)](https://python.org)
-[![Django Version](https://img.shields.io/badge/django-5.1.4-green.svg)](https://djangoproject.com)
-[![PostgreSQL](https://img.shields.io/badge/postgresql-15+-blue.svg)](https://postgresql.org)
-[![Docker](https://img.shields.io/badge/docker-27+-blue.svg)](https://docker.com)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
+DevVault is a Django-based web platform designed around **technical learning, interview preparation, and developer collaboration**.
+
+The platform allows developers to share technical content, discuss programming problems, interact with other developers, and organize useful resources for future reference.
 
 ---
 
-## Table of Contents
+## ✨ Features
 
-- [About The Project](#-about-the-project)
-- [Key Features](#-key-features)
-- [Tech Stack](#-tech-stack)
-- [Getting Started](#-getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation with Docker](#installation-with-docker)
-  - [Installation without Docker](#installation-without-docker)
-- [Project Structure](#-project-structure)
-- [API Endpoints](#-api-endpoints)
-- [Database Schema](#-database-schema)
-- [Contributing](#-contributing)
-- [License](#-license)
-- [Contact](#-contact)
+### 👤 Authentication & Profiles
 
----
+* User registration and login with validation
+* Developer profiles with avatar, bio, and social links
+* Follow / unfollow developers
 
-## About The Project
+### 📝 Content Management
 
-**DevVault** is a community platform where software engineers can:
+* Multiple content types:
 
-- Share **interview questions** from real companies (Google, Amazon, Snapp, etc.)
--  Post **algorithm challenges** and technical problems
--  **Answer questions** and get accepted by the post author
--  **Vote** on useful content (upvote/downvote)
--  **Bookmark** favorite posts for later
--  **Follow** other developers and build your network
--  **Write articles** and share knowledge
+  * Social posts
+  * Interview questions
+  * Articles
+* Image and video support
+* Company and tag categorization
+* SEO-friendly slug-based URLs
 
-Think of it as a **hybrid** between Stack Overflow, GitHub, and Reddit — but specialized for interview preparation and technical learning.
+### 💬 Community Interaction
 
----
+* Likes on posts and answers
+* Nested comments and replies
+* Upvote / downvote system
+* Bookmarking
+* Answers to interview questions
+* Answer acceptance by the question author
+* File uploads for programming answers such as `.py` and `.cpp`
 
-##  Key Features
+### 🔎 Search & Filtering
 
-###  Authentication & Profiles
-- User registration and login with validation
-- Profile management with avatar, bio, and social links
-- Follow/unfollow system
+* Full-text search across titles and content
+* Filtering by:
 
-###  Content Management
-- Multiple post types: **Social**, **Interview**, **Article**
-- Rich content with images and videos
-- Tag and company categorization
-- Slug-based URLs for SEO
+  * Post type
+  * Category
+  * Difficulty
+  * Company
+  * Tags
+* Pagination for large result sets
 
-###  Interactions
-- **Likes** on any content (posts, answers)
-- **Comments** with nested replies (threaded comments)
-- **Voting** (upvote/downvote) on posts
-- **Bookmarks** for saving content
-- **Answers** to interview questions with file upload (`.cpp`, `.py`, etc.)
-- **Answer acceptance** by post author
+### 🐳 Dockerized Development
 
-###  Search & Filters
-- Full-text search on titles and content
-- Filter by post type, category, difficulty, company, and tags
-- Pagination for large result sets
-
-###  Docker Support
-- Fully containerized with Docker and Docker Compose
-- PostgreSQL as production database
-- Persistent volumes for data safety
-- Easy setup with one command
+* Docker-based development environment
+* Docker Compose configuration
+* PostgreSQL database
+* Persistent database volumes
+* Simple project setup
 
 ---
 
-##  Tech Stack
+## 🛠️ Tech Stack
 
 ### Backend
-| Technology | Version | Purpose |
-|------------|---------|---------|
-| **Python** | 3.11+ | Programming language |
-| **Django** | 5.1.4 | Web framework |
-| **PostgreSQL** | 15+ | Production database |
-| **Django ORM** | - | Database abstraction |
-| **GenericForeignKey** | - | Polymorphic relationships |
+
+| Technology        | Version | Purpose                   |
+| ----------------- | ------: | ------------------------- |
+| Python            |   3.11+ | Programming language      |
+| Django            |   5.1.4 | Web framework             |
+| PostgreSQL        |     15+ | Database                  |
+| Django ORM        |       — | Database abstraction      |
+| GenericForeignKey |       — | Polymorphic relationships |
 
 ### Frontend
-| Technology | Version | Purpose |
-|------------|---------|---------|
-| **Bootstrap** | 5.3 | UI framework |
-| **Font Awesome** | 6.4 | Icons |
-| **Django Templates** | - | Server-side rendering |
 
-### DevOps
-| Technology | Version | Purpose |
-|------------|---------|---------|
-| **Docker** | 27+ | Containerization |
-| **Docker Compose** | 3.8 | Multi-container orchestration |
-| **Git** | - | Version control |
+| Technology       | Version | Purpose               |
+| ---------------- | ------: | --------------------- |
+| Bootstrap        |     5.3 | UI framework          |
+| Font Awesome     |     6.4 | Icons                 |
+| Django Templates |       — | Server-side rendering |
+
+### DevOps & Tools
+
+| Technology     | Purpose                     |
+| -------------- | --------------------------- |
+| Docker         | Containerization            |
+| Docker Compose | Multi-container development |
+| Git            | Version control             |
 
 ---
 
-##  Getting Started
+## 🏗️ Project Structure
+
+```text
+DevVault/
+├── accounts/          # Authentication and user profiles
+├── config/            # Django project configuration
+├── interactions/      # Likes, comments, votes and bookmarks
+├── posts/             # Posts, articles and interview content
+├── static/            # Static assets
+├── staticfiles/       # Collected static files
+├── templates/         # Django templates
+├── Dockerfile
+├── docker-compose.yml
+├── manage.py
+├── requirements.txt
+└── README.md
+```
+
+---
+
+## 🚀 Getting Started
 
 ### Prerequisites
 
-- **Python** 3.11 or higher
-- **PostgreSQL** 15 or higher
-- **Docker** and **Docker Compose** (optional but recommended)
-- **Git**
+Make sure you have the following installed:
+
+* Git
+* Python 3.11+
+* Docker
+* Docker Compose
+
+PostgreSQL 15+ is required when running the project without Docker.
 
 ---
 
-###  Installation with Docker (Recommended)
+## 🐳 Installation with Docker
 
-The easiest way to get started:
+### 1. Clone the repository
 
 ```bash
-# 1. Clone the repository
-git clone https://github.com/yourusername/DevVault.git
+git clone https://github.com/mhmdin-2007/DevVault.git
 cd DevVault
+```
 
-# 2. Create environment file
+### 2. Create the environment file
+
+```bash
 cp .env.example .env
-# Edit .env with your database credentials
+```
 
-# 3. Build and run with Docker
+Configure the required environment variables inside `.env`.
+
+### 3. Build and start the containers
+
+```bash
 docker-compose up -d
+```
 
-# 4. Run migrations and create superuser
+### 4. Run database migrations
+
+```bash
 docker exec -it devvault_web bash
 python manage.py migrate
-python manage.py createsuperuser
-exit
+```
 
-# 5. Access the application
-# Open http://localhost:8000
-# Admin panel: http://localhost:8000/admin
+### 5. Create a superuser
+
+```bash
+python manage.py createsuperuser
+```
+
+### 6. Open the application
+
+```text
+http://localhost:8000
+```
+
+Admin panel:
+
+```text
+http://localhost:8000/admin
+```
+
+---
+
+## 🔐 Environment Variables
+
+Sensitive configuration should be stored in `.env` and should not be committed to the repository.
+
+Use `.env.example` as a template for local configuration.
+
+---
+
+## 🗄️ Database
+
+DevVault uses **PostgreSQL** as its primary database and Django ORM for database interaction.
+
+The project also uses Django's relational modeling capabilities to manage relationships between users, posts, comments, answers, votes, bookmarks, and other entities.
+
+---
+
+## 🧩 API
+
+The project includes backend endpoints used by the application for handling functionality such as:
+
+* Authentication
+* Posts
+* Answers
+* Interactions
+* Search and filtering
+
+API documentation can be expanded as the API layer evolves.
+
+---
+
+## 🔮 Future Improvements
+
+Potential future improvements include:
+
+* Automated testing and increased test coverage
+* API documentation
+* CI/CD pipeline
+* Production deployment
+* Performance optimization
+* Additional developer-focused features
+
+---
+
+## 📄 License
+
+This project is licensed under the **BSD 3-Clause License**.
+
+---
+
+## 👨‍💻 Author
+
+**Mohammad Inanloo**
+
+* GitHub: [@mhmdin-2007](https://github.com/mhmdin-2007)
+* LinkedIn: [Mohammad Inanloo](https://www.linkedin.com/in/mohammad-inanloo-697a0a41/)
+* Email: [mhmdin2007@gmail.com](mailto:mhmdin2007@gmail.com)
