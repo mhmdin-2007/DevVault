@@ -1,19 +1,14 @@
-# docker-compose.yml
-# version: '3.8'
-
 services:
   # PostgreSQL Database
   db:
     image: postgres:15-alpine
     container_name: devvault_db
     environment:
-      POSTGRES_DB: devvault
-      POSTGRES_USER: devvault_user
-      POSTGRES_PASSWORD: M1386moin
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U devvault_user -d devvault"]
       interval: 10s
@@ -36,9 +31,9 @@ services:
       db:
         condition: service_healthy
     environment:
-      DB_NAME: devvault
-      DB_USER: devvault_user
-      DB_PASSWORD: M1386moin
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
       DB_HOST: db
       DB_PORT: 5432
     restart: unless-stopped
