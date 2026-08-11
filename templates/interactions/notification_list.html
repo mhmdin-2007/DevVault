@@ -16,7 +16,7 @@
                         <span class="badge bg-danger rounded-pill ms-2">{{ unread_count }}</span>
                     {% endif%}
                 </h5>
-                <div class="d-flex gap-2">
+                <div class="d-flex gap-2 align-items-center">
                     {% if unread_count > 0%}
                         <form method="post" action="{% url 'interactions:mark_all_read' %}" class="d-inline">
                             {% csrf_token %}
@@ -24,6 +24,10 @@
                                 Mark all as read<i class="fas fa-check-double me-1"></i>
                             </button>
                         </form>
+                    {% else %}
+                        <small class="text-danger align-items-center">
+                            you see all notifications
+                        </small>
                     {% endif %}
                     <a href="{% url 'posts:home' %}" class="btn btn-outline-primary btn-sm d-inline-flex align-items-center">
                         <i class="fas fa-home me-1"></i> Home
@@ -70,7 +74,7 @@
                         </a>
 
                         {% if not forloop.last %}
-                            <hr class="my-3">
+                            <hr class="my-2">
                         {% endif %}
 
                     {% endfor %}

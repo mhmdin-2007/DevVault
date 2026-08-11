@@ -48,7 +48,7 @@ def create_follow_notification(sender, instance, created, **kwargs):
         if instance.following != instance.follower:
             Notification.objects.create(
                 user=instance.following,
-                message=f"{instance.user.username} started following you!",
+                message=f"{instance.follower.username} started following you!",
                 activity=Notification.Category.FOLLOW,
                 link=f"/accounts/profile/{instance.follower.username}/"
             )
@@ -118,4 +118,3 @@ def create_answer_activity(sender, instance, created, **kwargs):
             object_id=instance.id,
             description=f"answered a question: {instance.post.title[:30]}"
         )
-
