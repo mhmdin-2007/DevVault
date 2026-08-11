@@ -40,22 +40,22 @@ class NotificationListView(LoginRequiredMixin, ListView):
 
         return context
 
-class MarkNotificatioinReadView(LoginRequiredMixin, View):
+class MarkNotificationReadView(LoginRequiredMixin, View):
     """
     Mark a single notification as read and redirect to its link.
     """
     def get(self, request, notification_id):
-        notificataion = get_object_or_404(
+        notification = get_object_or_404(
             Notification, 
             id=notification_id, 
             user=request.user
         )
 
-        notificataion.is_read = True
-        notificataion.save()
+        notification.is_read = True
+        notification.save()
     
-        if notificataion.link:
-            return redirect(notificataion.link)
+        if notification.link:
+            return redirect(notification.link)
 
         return redirect('interactions:notification_list')
 

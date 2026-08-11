@@ -13,7 +13,7 @@
             </div>
             <div class="card-body">
                 <form method="get" action="{% url 'posts:home' %}">
-                    <!-- Post Type -->
+                    <!-- post type -->
                     <div class="mb-3">
                         <label class="form-label">Post Type</label>
                         <select name="post_type" class="form-select">
@@ -26,7 +26,7 @@
                         </select>
                     </div>
                     
-                    <!-- Category -->
+                    <!-- category -->
                     <div class="mb-3">
                         <label class="form-label">Category</label>
                         <select name="category" class="form-select">
@@ -39,7 +39,7 @@
                         </select>
                     </div>
                     
-                    <!-- Difficulty -->
+                    <!-- difficulty -->
                     <div class="mb-3">
                         <label class="form-label">Difficulty</label>
                         <select name="difficulty" class="form-select">
@@ -52,7 +52,7 @@
                         </select>
                     </div>
                     
-                    <!-- Company -->
+                    <!-- company -->
                     <div class="mb-3">
                         <label class="form-label">Company</label>
                         <select name="company" class="form-select">
@@ -185,7 +185,7 @@
             {% for post in posts %}
                 <div class="card shadow-sm mb-4">
                     <div class="card-body">
-                        <!-- Author -->
+                        <!-- author -->
                         <div class="d-flex align-items-center mb-2">
                             {% if post.author.profile.avatar %}
                                 <img src="{{ post.author.profile.avatar.url }}" 
@@ -205,22 +205,22 @@
                             </div>
                         </div>
                         
-                        <!-- Title -->
+                        <!-- title -->
                         <h5>
                             <a href="{% url 'posts:post_detail' post.slug %}" class="text-decoration-none">
                                 {{ post.title }}
                             </a>
                         </h5>
                         
-                        <!-- Content -->
+                        <!-- content -->
                         <p class="text-muted">{{ post.content|truncatewords:30 }}</p>
                         
-                        <!-- Image -->
+                        <!-- image -->
                         {% if post.image %}
                             <img src="{{ post.image.url }}" class="img-fluid rounded mb-2" alt="{{ post.title }}">
                         {% endif %}
                         
-                        <!-- Tags & Meta -->
+                        <!-- tags & meta -->
                         <div class="d-flex flex-wrap gap-1 mb-2">
                             <span class="badge bg-secondary">{{ post.get_post_type_display }}</span>
                             {% if post.category %}
@@ -231,7 +231,7 @@
                             {% endif %}
                         </div>
                         
-                        <!-- Stats -->
+                        <!-- stats -->
                         <div class="d-flex gap-3 text-muted small">
                             <span><i class="fas fa-heart text-danger"></i> {{ post.likes_count }}</span>
                             <span><i class="fas fa-comment"></i> {{ post.comments_count }}</span>

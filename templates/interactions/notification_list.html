@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}DevVault | Notifications {% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-transparent d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">
+                    <i class="fas fa-bell text-danger me-2"></i>Notifications
+                    {% if unread_count > 0%}
+                        <span class="badge bg-danger rounded-pill ms-2">{{ unread_count }}</span>
+                    {% endif%}
+                </h5>
+                <div class="d-flex gap-2">
+                    {% if unread_count > 0%}
+                        <form method="post" action="{% url 'interactions:mark_all_read' %}" class="d-inline">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-outline-danger btn-sm d-inline-flex align-items-center">
+                                Mark all as read<i class="fas fa-check-double me-1"></i>
+                            </button>
+                        </form>
+                    {% endif %}
+                    <a href="{% url 'posts:home' %}" class="btn btn-outline-primary btn-sm d-inline-flex align-items-center">
+                        <i class="fas fa-home me-1"></i> Home
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow-sm">
+            <div class="card-body">
+                {% if notifications %}
+                    {% for notification in notifications %}
+                        <a href="{% url 'interactions:mark_notification_read' notification.id %}" class="text-decoration-none text-dark d-block">           
+                            <div class="notification-item d-flex align-items-center gap-3 p-2 rounded{% if not notification.is_read %}bg-light border-start border-primary border-4{% endif %}">
+                                <div class="flex-shrink-0" style="width: 36px; text-align: center;">
+                                    {% if notification.activity == 'LIKE' %}
+                                        <i class="fas fa-heart text-danger"></i>
+                                    {% elif notification.activity == 'COMMENT' %}
+                                        <i class="fas fa-comment text-primary"></i>
+                                    {% elif notification.activity == 'FOLLOW' %}
+                                        <i class="fas fa-user-plus text-success"></i>
+                                    {% elif notification.activity == 'ANSWER' %}
+                                        <i class="fas fa-reply text-info"></i>
+                                    {% elif notification.activity == 'BOOKMARK' %}
+                                        <i class="fas fa-bookmark text-warning"></i>
+                                    {% else %}
+                                        <i class="fas fa-bell text-warning"></i>
+                                    {% endif %}
+                                </div>
+                                <div class="flex-grow-1">
+                                    <p class="mb-0 {% if not notification.is_read %}fw-semibold{% else %}text-dark{% endif %}">
+                                        {{ notification.message }}
+                                    </p>
+                                    <small class="text-muted">
+                                        <i class="fas fa-clock me-1"></i> {{ notification.created_at|date:"M d, Y" }} 
+                                    </small>
+                                </div>
+
+                                {% if not notification.is_read %}
+                                    <span class="badge bg-primary rounded-pill">New</span>
+                                {% endif %}
+
+                            </div>
+                        </a>
+
+                        {% if not forloop.last %}
+                            <hr class="my-3">
+                        {% endif %}
+
+                    {% endfor %}
+                    
+                {% else %}
+                    <div class="text-center py-5">
+                        <i class="fas fa-bell fa-3x text-muted mb-3"></i>
+                        <h5>No Notifications yet</h5>
+                        <p class="text-muted">When someone interacts with your content, you'll see it here</p>
+                        <a href="{% url 'posts:home' %}" class="btn btn-primary">
+                            <i class="fas fa-home me-1"></i> Browse Posts
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
