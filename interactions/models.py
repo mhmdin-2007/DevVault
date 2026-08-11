@@ -14,6 +14,7 @@ class Notification(models.Model):
         COMMENT = 'COMMENT', 'Commented on your Post'
         ANSWER = 'ANSWER', 'Answered your question'
         FOLLOW = 'FOLLOW', 'Follow You'
+        BOOKMARK = 'BOOKMARK', 'Bookmarked your post'
 
     user = models.ForeignKey(
         User,

@@ -1,7 +1,7 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib.contenttypes.models import ContentType
-from .models import Post, Activity, Like, Comment, Follow, Answer, Notification
+from .models import Post, Activity, Bookmark, Like, Comment, Follow, Answer, Notification
 
 @receiver(post_save, sender=Like)
 def create_like_notification(sender, instance, created, **kwargs):
@@ -14,6 +14,19 @@ def create_like_notification(sender, instance, created, **kwargs):
                     message=f"{instance.user.username} liked your post: {content_object.title[:30]}",
                     activity=Notification.Category.LIKE,
                     link=f"/post/{content_object.slug}/",
+                )
+
+@receiver(post_save, sender=Bookmark)
+def create_bookmark_notification(sender, instance, created, **kwargs):
+    if created:
+        content_object = instance.content_object
+        if content_object and hasattr(content_object, 'author'):
+            if  content_object.author != instance.user:
+                Notification.objects.create(
+                    user=content_object.author,
+                    message=f"{instance.user.username} bookmarked your post: {content_object.title[:30]}",
+                    activity=Notification.Category.BOOKMARK,
+                    link=f"/post/{content_object.slug}/"
                 )
 
 @receiver(post_save, sender=Comment)
