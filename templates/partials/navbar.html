@@ -8,22 +8,25 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto align-items-center">
+            <ul class="navbar-nav ms-auto align-items-center gap-3">
                 {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a href="{% url 'interactions:notification_list' %}" class="nav-link">
-                            <i class="fas fa-bell"></i>
+                    <li class="nav-item position-relative">
+                        <a href="{% url 'interactions:notification_list' %}" class="nav-link notification-link">
+                            <i class="fas fa-bell fa-lg"></i>
+                            {% if unread_count > 0%}
+                                <span class="badge bg-danger rounded-pill notification-badge">{{ unread_count }}</span>
+                            {% endif %}
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{% url 'accounts:profile' user.username %}" class="nav-link text-light">
-                            <i class="fas fa-user-circle me-1"></i>{{ user.username }}
+                        <a href="{% url 'accounts:profile' user.username %}" class="btn btn-outline-light">
+                            {{ user.username }} <i class="fas fa-user-circle me-1"></i>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="{% url 'interactions:activity_feed' %}"
-                            class="nav-link text-light">
-                            <i class="fas fa-rss me-1"></i>Feed
+                            class="btn btn-outline-light">
+                            <i class="fas fa-rss me-1" style="color: rgb(14, 158, 151);"></i>Feed
                         </a>
                     </li>
                     <li class="nav-item">
@@ -36,7 +39,7 @@
                     </li>
                 {% else %}
                     <li class="nav-item">
-                        <a href="{% url 'accounts:login' %}?next={{ requests.path }}" class="btn btn-outline-light btn-sm">
+                        <a href="{% url 'accounts:login' %}?next={{ requests.path }}" class="btn btn-outline-success btn-sm">
                             <i class="fas fa-sign-in-alt me-1"></i>Login
                         </a>
                     </li>
@@ -50,3 +53,33 @@
         </div>
     </div>
 </nav>
+
+<style>
+    .notificatoin-link {
+        position: relative;
+        padding: 0.5rem 0.75rem;
+    }
+
+    .notification-link i {
+        font-size: 1.3rem;
+        color: #ffff;
+    }
+
+    .notification-link i:hover {
+        color: #f8d7da;
+    }
+
+    .notification-badge {
+        padding: 0.2rem 0.45rem;
+        position: absolute;
+        top: -2px;
+        border: 2px solid #212529;
+        right: -2px;
+        font-size: 0.7rem;
+        align-items: center;
+        justify-content: center;
+        min-height: 18px;
+        min-width: 18px;
+        display: flex;
+    }
+</style>
