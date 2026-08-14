@@ -21,9 +21,11 @@ from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework.routers import DefaultRouter
 from posts.viewsets import PostViewSet
+from accounts.viewsets import UserViewset
 
 router = DefaultRouter()
 router.register('posts', PostViewSet)
+router.register('users', UserViewset)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
