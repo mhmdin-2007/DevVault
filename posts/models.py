@@ -122,13 +122,17 @@ class Post(models.Model):
         max_length=20,
         choices=Category.choices,
         default=Category.INTERVIEW,
-        verbose_name='Category'
+        verbose_name='Category', 
+        blank=True, 
+        null=True
     )
     difficulty = models.CharField(
         max_length=20, 
         choices=Difficulty.choices,
         default=Difficulty.BEGINNER,
-        verbose_name='Difficulty'
+        verbose_name='Difficulty',
+        blank=True, 
+        null=True
     )
     company = models.ForeignKey(
         Company,

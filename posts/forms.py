@@ -66,8 +66,14 @@ class PostForm(forms.ModelForm):
             super().__init__(*args, **kwargs)
 
             # make interview fields optional by default
-            self.fields['category'].required = False
-            self.fields['difficulty'].required = False
+            instacne = kwargs.get('instance')
+            if instacne and instacne.post_type == Post.PostType.INTERVIEW:
+                self.fields['difficulty'].required = True
+                self.fields['category'].required = True
+            else:
+                self.fields['difficulty'].required = False
+                self.fields['category'].required = False
+
             self.fields['company'].required = False
             self.fields['tags'].required = False
             self.fields['image'].required = False
