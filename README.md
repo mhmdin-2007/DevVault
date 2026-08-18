@@ -1,5 +1,11 @@
 # DevVault
 
+[![Python Version](https://img.shields.io/badge/python-3.11+-blue.svg)](https://python.org)
+[![Django Version](https://img.shields.io/badge/django-5.1.4-green.svg)](https://djangoproject.com)
+[![PostgreSQL](https://img.shields.io/badge/postgresql-15+-blue.svg)](https://postgresql.org)
+[![Docker](https://img.shields.io/badge/docker-27+-blue.svg)](https://docker.com)
+[![License](https://img.shields.io/badge/license-BSD_3--Clause-red.svg)](LICENSE)
+
 > A community-driven platform for software engineers to share interview questions, algorithm challenges, and technical knowledge.
 
 DevVault is a Django-based web platform designed around **technical learning, interview preparation, and developer collaboration**.
@@ -8,7 +14,24 @@ The platform allows developers to share technical content, discuss programming p
 
 ---
 
-## ✨ Features
+## 📖 Table of Contents
+
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Getting Started](#getting-started)
+- [Installation with Docker](#installation-with-docker)
+- [Environment Variables](#environment-variables)
+- [Database](#database)
+- [API](#api)
+- [Future Improvements](#future-improvements)
+- [Contributing](#contributing)
+- [License](#license)
+- [Author](#author)
+
+---
+
+##  Features
 
 ### 👤 Authentication & Profiles
 
@@ -59,7 +82,7 @@ The platform allows developers to share technical content, discuss programming p
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 ### Backend
 
@@ -89,7 +112,7 @@ The platform allows developers to share technical content, discuss programming p
 
 ---
 
-## 🏗️ Project Structure
+## Project Structure
 
 ```text
 DevVault/
@@ -109,7 +132,7 @@ DevVault/
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -124,7 +147,7 @@ PostgreSQL 15+ is required when running the project without Docker.
 
 ---
 
-## 🐳 Installation with Docker
+## Installation with Docker
 
 ### 1. Clone the repository
 
@@ -174,7 +197,7 @@ http://localhost:8000/admin
 
 ---
 
-## 🔐 Environment Variables
+## Environment Variables
 
 Sensitive configuration should be stored in `.env` and should not be committed to the repository.
 
@@ -182,7 +205,7 @@ Use `.env.example` as a template for local configuration.
 
 ---
 
-## 🗄️ Database
+## Database
 
 DevVault uses **PostgreSQL** as its primary database and Django ORM for database interaction.
 
@@ -190,26 +213,29 @@ The project also uses Django's relational modeling capabilities to manage relati
 
 ---
 
-## 🧩 API
+##  API
 
-The project includes backend endpoints used by the application for handling functionality such as:
+The project includes **REST API** endpoints built with **Django REST Framework**.
 
-* Authentication
-* Posts
-* Answers
-* Interactions
-* Search and filtering
-
-API documentation can be expanded as the API layer evolves.
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/posts/` | List all posts |
+| POST | `/api/posts/` | Create a new post |
+| GET | `/api/posts/{id}/` | Retrieve a post |
+| PUT | `/api/posts/{id}/` | Update a post |
+| DELETE | `/api/posts/{id}/` | Delete a post |
+| GET | `/api/users/` | List all users |
+| GET | `/api/users/{id}/` | Retrieve a user |
 
 ---
 
-## 🔮 Future Improvements
+##  Future Improvements
 
 Potential future improvements include:
 
 * Automated testing and increased test coverage
 * API documentation
+* UI/UX With professional Design 
 * CI/CD pipeline
 * Production deployment
 * Performance optimization
@@ -217,13 +243,27 @@ Potential future improvements include:
 
 ---
 
-## 📄 License
+##  License
 
 This project is licensed under the **BSD 3-Clause License**.
 
 ---
+##  Contributing
 
-## 👨‍💻 Author
+Contributions are welcome! Here's how you can help:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/your-feature`)
+3. Commit your changes (`git commit -m 'Add new feature: your-feature'`)
+4. Push to the branch (`git push origin feature/your-feature`)
+5. Open a Pull Request
+
+### Code Style
+- Follow **PEP 8** for Python code
+- Use **Class-Based Views** where possible
+- Write **docstrings** for functions and classes
+- Keep **templates** clean and organized
+##  Author
 
 **Mohammad Inanloo**
 
