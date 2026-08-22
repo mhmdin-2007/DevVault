@@ -17,14 +17,15 @@
                 </h4>
             </div>
             <div class="card-body">
-                <form method="post", enctype="multipart/form-data">
+                <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
+                    
                     {% for field in form %}
                         <div class="mb-3">
                             {{ field.label_tag }}
                             {{ field }}
                             {% if field.help_text %}
-                                <small class="from-text text-muted">{{ field.help_text }}</small>
+                                <small class="form-text text-muted">{{ field.help_text }}</small>
                             {% endif %}
                             {% if field.errors %}
                                 <div class="invalid-feedback d-block">
@@ -48,13 +49,13 @@
     </div>
 </div>
 <script>
-    document.addEventListener('DOMContentLoaded', function(){
+    document.addEventListener('DOMContentLoaded', function() {
         const postType = document.getElementById('id_post_type');
         const category = document.getElementById('id_category').closest('.mb-3');
         const difficulty = document.getElementById('id_difficulty').closest('.mb-3');
 
         function toggleInterviewFields() {
-            if (postType.value === 'INTERVIEW'){
+            if (postType.value === 'INTERVIEW') {
                 category.style.display = 'block';
                 difficulty.style.display = 'block';
             } else {

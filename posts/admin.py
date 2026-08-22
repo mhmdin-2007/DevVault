@@ -39,4 +39,4 @@ class PostAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
     readonly_fields = ['created_at', 'updated_at']
     inlines = [AnswerInline]
-    filter_horizontal = ['tags']
+    # filter_horizontal = ['tags'] this is  only for ManyToManyField for section of tags 

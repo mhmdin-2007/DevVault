@@ -1,11 +1,22 @@
 from django import forms
-from .models import Post
+from .models import Post, Tag
+from taggit.forms import TagWidget
 
 class PostForm(forms.ModelForm):
     """
     Form for creating and editing posts.
     Dynamically updates fields based on post type.
     """
+
+    # new_tags = forms.CharField(
+    #     widget=forms.TextInput(attrs={
+    #         'class': 'form-control',
+    #         'placeholder': 'Add new tags',
+    #         'id': 'id_new_tags'
+    #     }),
+    #     label='New tags (manual)',
+    #     help_text='Enter new tags seprated by comma (e.g. Python, Django, API)'
+    # )
 
     class Meta:
         model = Post
@@ -20,7 +31,7 @@ class PostForm(forms.ModelForm):
             }),
             'content': forms.Textarea(attrs={
                 'class': 'form-control',
-                'row': 10,
+                'rows': 10,
                 'placeholder': 'Write your post content here...'
             }),
             'summary': forms.Textarea(attrs={
@@ -38,7 +49,7 @@ class PostForm(forms.ModelForm):
                 'class': 'form-select'
             }),
             'company': forms.Select(attrs={'class': 'form-select'}),
-            'tags': forms.SelectMultiple(attrs={'class': 'form-select'}),
+            'tags': TagWidget(attrs={'class': 'form-control'}),
             'image': forms.FileInput(attrs={'class': 'form-control'}),
             'video': forms.FileInput(attrs={'class': 'form-control'}),
         }
@@ -52,22 +63,21 @@ class PostForm(forms.ModelForm):
             'summary': 'Summary (optional)',
             'category': 'Category (for interview posts)',
             'difficulty': "Difficulty (for interview posts)",
-            'company': 'Comoany (optional)',
+            'company': 'Company (optional)',
             'tags': 'Tags (optional)',
         }
 
-        help_text = {
-            'tags': 'Hold Ctrl to select multiple tags',
+        help_texts = {
             'image': 'Upload a cover image for your post',
-            'video': 'Updoad a video file (mp4, webm, etc.)',
+            'video': 'Upload a video file (mp4, webm, etc.)',
         }
 
         def __init__(self, *args, **kwargs):
             super().__init__(*args, **kwargs)
 
             # make interview fields optional by default
-            instacne = kwargs.get('instance')
-            if instacne and instacne.post_type == Post.PostType.INTERVIEW:
+            instance = kwargs.get('instance')
+            if instance and instance.post_type == Post.PostType.INTERVIEW:
                 self.fields['difficulty'].required = True
                 self.fields['category'].required = True
             else:

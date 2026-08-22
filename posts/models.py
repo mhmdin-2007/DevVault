@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.text import slugify
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
+from taggit.managers import TaggableManager
 
 class Tag(models.Model):
     '''
@@ -142,12 +143,9 @@ class Post(models.Model):
         related_name='posts',
         verbose_name='Company'
     )
-    tags = models.ManyToManyField(
-        Tag, 
-        related_name='posts',
-        blank=True, 
-        verbose_name='Tags'
-    )
+
+    tags = TaggableManager(blank=True)
+    
     created_at = models.DateTimeField(
         auto_now_add=True,
         verbose_name='Created At'
