@@ -24,7 +24,8 @@
                                 Mark all as read<i class="fas fa-check-double me-1"></i>
                             </button>
                         </form>
-                    {% else %}
+                    {% endif %}
+                    {% if notifications and unread_count == 0 %}
                         <small class="text-danger align-items-center">
                             you see all notifications
                         </small>
