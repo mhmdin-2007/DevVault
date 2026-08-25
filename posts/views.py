@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
-from .models import Post, Company, Tag
+from .models import Post, Company
 from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .forms import PostForm
@@ -10,6 +10,8 @@ from django.shortcuts import get_object_or_404
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.models import User
 from interactions.models import Follow
+from django.db.models import Count
+from taggit.models import Tag
 
 class PostListView(ListView):
     """
@@ -79,7 +81,7 @@ class PostListView(ListView):
 
         search_query = self.request.GET.get('q')
         
-        # جستجوی کاربران
+        # users search
         if search_query:
             context['search_users'] = User.objects.filter(
                 Q(username__icontains=search_query) |
@@ -92,7 +94,7 @@ class PostListView(ListView):
         
         context['search_query'] = search_query
         
-        #فیلترها
+        #filters
         context['categories'] = Post.Category.choices
         context['difficulties'] = Post.Difficulty.choices
         context['post_types'] = Post.PostType.choices
@@ -109,12 +111,17 @@ class PostListView(ListView):
         }
 
         #وضعیت فالو
-        
         if self.request.user.is_authenticated:
             followed_users = self.request.user.following.all().values_list('following', flat=True)
             context['has_following'] = followed_users.exists()
         else:
             context['has_following'] = False
+
+        popular_tags = Tag.objects.annotate(
+            post_count=Count('post')
+        ).filter(post_count__gt=0).order_by('-post_count')[:10]
+
+        context['popular_tags'] = popular_tags
 
         return context
     
