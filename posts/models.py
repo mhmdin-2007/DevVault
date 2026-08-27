@@ -4,29 +4,6 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from taggit.managers import TaggableManager
 
-class Tag(models.Model):
-    '''
-    Tag model for categorizing posts.
-    Each tag has a unique name and slug.
-    '''
-    name = models.CharField(max_length=50, unique=True)
-    slug = models.SlugField(max_length=60, unique=True, blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    class Meta:
-        ordering = ['name']
-        verbose_name = 'Tag'
-        verbose_name_plural = 'Tags'
-
-    def save(self, *args, **kwargs):
-        '''Auto-generate slug from name if not provided'''
-        if not self.slug:
-            self.slug = slugify(self.name)
-        super().save(*args, **kwargs)
-
-    def __str__(self):
-        return self.name
-    
 class Company(models.Model):
     '''
     Company model for interview questions context.
@@ -229,4 +206,28 @@ class Post(models.Model):
     def accepted_answer(self):
         """Return the accepted answer if exists."""
         return self.answers.filter(is_accepted=True).first()
+    
+
+# class Tag(models.Model):
+#     '''
+#     Tag model for categorizing posts.
+#     Each tag has a unique name and slug.
+#     '''
+#     name = models.CharField(max_length=50, unique=True)
+#     slug = models.SlugField(max_length=60, unique=True, blank=True)
+#     created_at = models.DateTimeField(auto_now_add=True)
+
+#     class Meta:
+#         ordering = ['name']
+#         verbose_name = 'Tag'
+#         verbose_name_plural = 'Tags'
+
+#     def save(self, *args, **kwargs):
+#         '''Auto-generate slug from name if not provided'''
+#         if not self.slug:
+#             self.slug = slugify(self.name)
+#         super().save(*args, **kwargs)
+
+#     def __str__(self):
+#         return self.name
     

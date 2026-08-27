@@ -1,15 +1,6 @@
 from django.contrib import admin
-from .models import Tag, Company, Post
+from .models import Company, Post
 from interactions.models import Answer
-
-
-@admin.register(Tag)
-class TagAdmin(admin.ModelAdmin):
-    list_display = ['name', 'slug', 'created_at']
-    search_fields = ['name', 'slug']
-    prepopulated_fields = {'slug': ('name',)}
-    readonly_fields = ['created_at']
-
 
 @admin.register(Company)
 class CompanyAdmin(admin.ModelAdmin):
@@ -39,4 +30,12 @@ class PostAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
     readonly_fields = ['created_at', 'updated_at']
     inlines = [AnswerInline]
+
+
+# @admin.register(Tag)
+# class TagAdmin(admin.ModelAdmin):
+#     list_display = ['name', 'slug', 'created_at']
+#     search_fields = ['name', 'slug']
+#     prepopulated_fields = {'slug': ('name',)}
+#     readonly_fields = ['created_at']
     # filter_horizontal = ['tags'] this is  only for ManyToManyField for section of tags 

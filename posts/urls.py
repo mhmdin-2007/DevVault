@@ -1,4 +1,3 @@
-from .models import Tag
 from django.urls import path
 
 from .views import PostDetailView, PostListView, PostCreateView, PostUpdateView, PostDeleteView
