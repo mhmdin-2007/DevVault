@@ -245,7 +245,7 @@ def answer_create(request, post_slug):
     """ Create an answer for an interview question with file upload. """
     post = get_object_or_404(Post, slug=post_slug)
 
-    if not post.is_interview:
+    if post.post_type != Post.PostType.INTERVIEW:
         messages.error(request, "This post does not accept answers.")
         return redirect('posts:post_detail', slug=post.slug)
 
@@ -256,7 +256,7 @@ def answer_create(request, post_slug):
             answer.post = post
             answer.author = request.user
             answer.save()
-            messages.success(request, "Your answer has been submited!")
+            messages.success(request, "Your answer has been submitted!")
 
             return redirect('posts:post_detail', slug=post.slug)
     else:
