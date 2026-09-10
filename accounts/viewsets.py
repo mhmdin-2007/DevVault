@@ -1,11 +1,11 @@
 from rest_framework import viewsets
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from .serializers import UserSerializer
 from django.contrib.auth.models import User
+from rest_framework.permissions import AllowAny
 
-class UserViewset(viewsets.ModelViewSet):
+class UserViewset(viewsets.ReadOnlyModelViewSet):
     """API endpoint for users."""
     
     serializer_class = UserSerializer
     queryset = User.objects.all()
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [AllowAny]
