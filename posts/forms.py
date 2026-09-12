@@ -73,20 +73,20 @@ class PostForm(forms.ModelForm):
             'video': 'Upload a video file (mp4, webm, etc.)',
         }
 
-        def __init__(self, *args, **kwargs):
-            super().__init__(*args, **kwargs)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
-            # make interview fields optional by default
-            instance = kwargs.get('instance')
-            if instance and instance.post_type == Post.PostType.INTERVIEW:
-                self.fields['difficulty'].required = True
-                self.fields['category'].required = True
-            else:
-                self.fields['difficulty'].required = False
-                self.fields['category'].required = False
+        # make interview fields optional by default
+        instance = kwargs.get('instance')
+        if instance and instance.post_type == Post.PostType.INTERVIEW:
+            self.fields['difficulty'].required = True
+            self.fields['category'].required = True
+        else:
+            self.fields['difficulty'].required = False
+            self.fields['category'].required = False
 
-            self.fields['company'].required = False
-            self.fields['tags'].required = False
-            self.fields['image'].required = False
-            self.fields['video'].required = False
-            self.fields['summary'].required = False
+        self.fields['company'].required = False
+        self.fields['tags'].required = False
+        self.fields['image'].required = False
+        self.fields['video'].required = False
+        self.fields['summary'].required = False
