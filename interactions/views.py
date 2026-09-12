@@ -44,7 +44,7 @@ class MarkNotificationReadView(LoginRequiredMixin, View):
     """
     Mark a single notification as read and redirect to its link.
     """
-    def get(self, request, notification_id):
+    def post(self, request, notification_id):
         notification = get_object_or_404(
             Notification, 
             id=notification_id, 
@@ -52,7 +52,7 @@ class MarkNotificationReadView(LoginRequiredMixin, View):
         )
 
         notification.is_read = True
-        notification.save()
+        notification.save(update_fields=['is_read'])
     
         if notification.link:
             return redirect(notification.link)

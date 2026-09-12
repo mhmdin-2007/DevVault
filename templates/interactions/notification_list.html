@@ -41,38 +41,41 @@
             <div class="card-body">
                 {% if notifications %}
                     {% for notification in notifications %}
-                        <a href="{% url 'interactions:mark_notification_read' notification.id %}" class="text-decoration-none text-dark d-block">           
-                            <div class="notification-item d-flex align-items-center gap-3 p-2 rounded{% if not notification.is_read %}bg-light border-start border-primary border-4{% endif %}">
-                                <div class="flex-shrink-0" style="width: 36px; text-align: center;">
-                                    {% if notification.activity == 'LIKE' %}
-                                        <i class="fas fa-heart text-danger"></i>
-                                    {% elif notification.activity == 'COMMENT' %}
-                                        <i class="fas fa-comment text-primary"></i>
-                                    {% elif notification.activity == 'FOLLOW' %}
-                                        <i class="fas fa-user-plus text-success"></i>
-                                    {% elif notification.activity == 'ANSWER' %}
-                                        <i class="fas fa-reply text-info"></i>
-                                    {% elif notification.activity == 'BOOKMARK' %}
-                                        <i class="fas fa-bookmark text-warning"></i>
-                                    {% else %}
-                                        <i class="fas fa-bell text-warning"></i>
+                        <form method="post" action="{% url 'interactions:mark_notification_read' notification.id %}" class="d-block">           
+                            {% csrf_token %}
+                            <button type="submit" class="border-0 bg-transparent text-decoration-none text-dark d-block w-100 text-start p-0">
+                                <div class="notification-item d-flex align-items-center gap-3 p-2 rounded{% if not notification.is_read %}bg-light border-start border-primary border-4{% endif %}">
+                                    <div class="flex-shrink-0" style="width: 36px; text-align: center;">
+                                        {% if notification.activity == 'LIKE' %}
+                                            <i class="fas fa-heart text-danger"></i>
+                                        {% elif notification.activity == 'COMMENT' %}
+                                            <i class="fas fa-comment text-primary"></i>
+                                        {% elif notification.activity == 'FOLLOW' %}
+                                            <i class="fas fa-user-plus text-success"></i>
+                                        {% elif notification.activity == 'ANSWER' %}
+                                            <i class="fas fa-reply text-info"></i>
+                                        {% elif notification.activity == 'BOOKMARK' %}
+                                            <i class="fas fa-bookmark text-warning"></i>
+                                        {% else %}
+                                            <i class="fas fa-bell text-warning"></i>
+                                        {% endif %}
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <p class="mb-0 {% if not notification.is_read %}fw-semibold{% else %}text-dark{% endif %}">
+                                            {{ notification.message }}
+                                        </p>
+                                        <small class="text-muted">
+                                            <i class="fas fa-clock me-1"></i> {{ notification.created_at|date:"M d, Y" }} 
+                                        </small>
+                                    </div>
+
+                                    {% if not notification.is_read %}
+                                        <span class="badge bg-primary rounded-pill">New</span>
                                     {% endif %}
-                                </div>
-                                <div class="flex-grow-1">
-                                    <p class="mb-0 {% if not notification.is_read %}fw-semibold{% else %}text-dark{% endif %}">
-                                        {{ notification.message }}
-                                    </p>
-                                    <small class="text-muted">
-                                        <i class="fas fa-clock me-1"></i> {{ notification.created_at|date:"M d, Y" }} 
-                                    </small>
-                                </div>
 
-                                {% if not notification.is_read %}
-                                    <span class="badge bg-primary rounded-pill">New</span>
-                                {% endif %}
-
-                            </div>
-                        </a>
+                                </div>
+                            </button>
+                        </form>
 
                         {% if not forloop.last %}
                             <hr class="my-2">
