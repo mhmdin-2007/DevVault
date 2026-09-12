@@ -4,6 +4,7 @@ def notification_count(request):
     '''add unread notification count to all template.'''
     if request.user.is_authenticated:
         unread_count = Notification.objects.filter(
+            user=request.user,
             is_read=False
         ).count()
     else:
