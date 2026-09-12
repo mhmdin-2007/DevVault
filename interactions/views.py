@@ -121,7 +121,7 @@ def like_toggle(request, content_type_id, object_id):
 def add_comment(request, content_type_id, object_id):
     '''
     Add a comment to any content.
-    Supports replies via parent_id parametr.
+    Supports replies via parent_id parameter.
     '''
 
     content_type = get_object_or_404(ContentType, id=content_type_id)
@@ -138,8 +138,13 @@ def add_comment(request, content_type_id, object_id):
         # Handle reply to a comment
         parent_id = request.POST.get('parent_id')
         if parent_id:
-             parent = get_object_or_404(Comment, id=parent_id)
-             comment.parent = parent
+            parent = get_object_or_404(
+                Comment, 
+                id=parent_id,
+                content_type=content_type,
+                object_id=object_id,
+            )
+            comment.parent = parent
 
         comment.save()
         messages.success(request, 'Comment added successfully!')
