@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
 from .models import Post, Company
-from django.db.models import Q
+from django.db.models import (
+    Q, Case, When, Value, IntegerField
+)
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .forms import PostForm
 from django.contrib import messages
@@ -33,9 +35,18 @@ class PostListView(ListView):
             if self.request.user.is_authenticated:
                 followed_users = self.request.user.following.all().values_list('following', flat=True)
                 if followed_users.exists():
-                    queryset = Post.objects.filter(
-                        Q(author__in=followed_users) | Q(author__isnull=False)
-                    ).distinct().order_by('-created_at')
+                    followed_user_ids = list(followed_users)
+
+                    queryset = Post.objects.annotate(
+                        followed_priority=Case(
+                            When(
+                                author_id__in=followed_user_ids,
+                                then=Value(0),
+                            ),
+                            default=Value(1),
+                            output_field=IntegerField(),
+                        )
+                    ).order_by('followed_priority', '-created_at')
                 else:
                     queryset = Post.objects.all().order_by('-created_at')
             else:
@@ -127,7 +138,7 @@ class PostListView(ListView):
     
 class PostCreateView(LoginRequiredMixin, CreateView):
     """
-    Create a new post with any type(SOCILA, INTERVIEW, ARTICLE).
+    Create a new post with any type(SOCIAL, INTERVIEW, ARTICLE).
     User must be authenticated.
     """
     model = Post
@@ -147,7 +158,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     '''
-    Update an existin post.
+    Update an existing post.
     Only the author can update.
     '''
     model = Post
