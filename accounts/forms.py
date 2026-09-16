@@ -5,7 +5,7 @@ from django.core.validators import MinLengthValidator
 from .models import Profile
 
 class CustomUserCreationForm(UserCreationForm):
-    '''Enhanced user registeration form with additional validation.'''
+    '''Enhanced user registration form with additional validation.'''
     email = forms.EmailField(required=True, widget=forms.EmailInput(attrs={
         'class': 'form-control', 
         'placeholder': 'example@gmail.com'
@@ -28,7 +28,7 @@ class CustomUserCreationForm(UserCreationForm):
         fields = ['username', 'email', 'password1', 'password2']
 
     def clean_email(self):
-        '''Vallidate email uniqueness.'''
+        '''Validate email uniqueness.'''
         email = self.cleaned_data.get('email')
         if User.objects.filter(email=email).exists():
             raise forms.ValidationError('This email is already registered.')

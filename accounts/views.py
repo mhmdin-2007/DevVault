@@ -1,15 +1,18 @@
 from django.shortcuts import render, redirect
 from django.views.generic import CreateView, DetailView, UpdateView
-from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.contrib.auth import login
 from django.urls import reverse_lazy, reverse
 from django.contrib import messages
-from django.contrib.auth.views import LoginView, LogoutView#ویو های آماده جنگو برای ورود و خروج
+from django.contrib.auth.views import LoginView, LogoutView #ویو های آماده جنگو برای ورود و خروج
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
-from .forms import ProfileForm
+from .forms import (
+    ProfileForm,
+    CustomUserCreationForm,
+    CustomAuthenticationForm,
+)
 from .models import Profile
 from django.views.generic import ListView
 from django.db.models import Q
@@ -48,7 +51,7 @@ class BookmarkView(LoginRequiredMixin, ListView):
 # def user_bookmark(request):
 #     """
 #     Display user's bookmarked posts.
-#     Olny the logged-in usdr can see their own bookmarks.
+#     Only the logged-in user can see their own bookmarks.
 #     """
 
 #     bookmarks = Bookmark.objects.filter(
@@ -65,7 +68,7 @@ class BookmarkView(LoginRequiredMixin, ListView):
 #     return render(request, 'accounts/bookmarks.html', context=context)
     
 class ProfileView(DetailView):
-    '''Display user profile with thier posts and stats.'''
+    '''Display user profile with their posts and stats.'''
     model = User
     template_name = 'accounts/profile.html'
     context_object_name = 'profile_user'
@@ -132,8 +135,8 @@ class ProfileEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return super().form_valid(form)
 
 class RegisterView(CreateView, LoginRequiredMixin):
-    '''User registeration with automatic login after signup.'''
-    form_class = UserCreationForm
+    '''User registration with automatic login after signup.'''
+    form_class = CustomUserCreationForm
     template_name = 'accounts/register.html'
     success_url = reverse_lazy('posts:home')
 
@@ -151,8 +154,9 @@ class RegisterView(CreateView, LoginRequiredMixin):
         return super().dispatch(request, *args, **kwargs)
 
 class CustomLoginview(LoginView):
-    '''Custom login view with echanced messaging.'''
+    '''Custom login view with enhanced messaging.'''
     template_name = 'accounts/login.html'
+    authentication_form = CustomAuthenticationForm
     redirect_authenticated_user = True
 
     def form_valid(self, form):
@@ -175,10 +179,10 @@ class CustomLoginview(LoginView):
         return reverse('posts:home')
     
 class CustomLogoutView(LogoutView):
-    '''Custom logout view with confiramation message.'''
+    '''Custom logout view with confirmation message.'''
     next_page = reverse_lazy('posts:home')
 
     def dispatch(self, request, *args, **kwargs):
         '''Add info message before logout.'''
-        messages.info(request, "you have been succussfully loggedout.")
+        messages.info(request, "you have been successfully loggedout.")
         return super().dispatch(request, *args, **kwargs)
