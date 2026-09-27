@@ -148,7 +148,7 @@ class Post(models.Model):
         Override save to auto-generate slug from title.
         '''
         if not self.slug:
-            base_slug = slugify(self.title)
+            base_slug = slugify(self.title, allow_unicode=True)
 
             # if sulg is duplicate (unique=True) add a number to it.
             slug = base_slug
