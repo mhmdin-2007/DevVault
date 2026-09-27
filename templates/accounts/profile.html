@@ -24,7 +24,7 @@
                 {% endif %}
                 
                 <h4>{{ profile_user.get_full_name|default:profile_user.username }}</h4>
-                <p class="text-muted">@{{ profile_user.username }}</p>
+                <p class="text-muted">{{ profile_user.email }}</p>
                 
                 {% if profile_user.profile.bio %}
                     <p>{{ profile_user.profile.bio }}</p>
