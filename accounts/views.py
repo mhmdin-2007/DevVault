@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from django.views.generic import CreateView, DetailView, UpdateView
-from django.urls import reverse_lazy
 from django.contrib.auth import login
 from django.urls import reverse_lazy, reverse
 from django.contrib import messages
@@ -19,6 +18,7 @@ from django.db.models import Q
 from interactions.models import Bookmark
 from django.views.decorators.csrf import requires_csrf_token
 from django.contrib.auth.decorators import login_required
+# from django.contrib.auth.forms import UserCreationForm
 
 class BookmarkView(LoginRequiredMixin, ListView):
     '''
@@ -134,7 +134,7 @@ class ProfileEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         messages.success(self.request, "پروفایل شما با موفقیت ویرایش شد.")
         return super().form_valid(form)
 
-class RegisterView(CreateView, LoginRequiredMixin):
+class RegisterView(CreateView):
     '''User registration with automatic login after signup.'''
     form_class = CustomUserCreationForm
     template_name = 'accounts/register.html'
@@ -169,14 +169,14 @@ class CustomLoginview(LoginView):
         messages.error(self.request, "Invalid username or password. Please try again.")
         return super().form_invalid(form)
     
-    def get_success_url(self):
-        #if there is a 'next' go to that one.
-        next_url = self.request.GET.get('next')
-        if next_url:
-            return next_url
+    # def get_success_url(self):
+    #     #if there is a 'next' go to that one.
+    #     next_url = self.request.GET.get('next')
+    #     if next_url:
+    #         return next_url
         
-        #else: go to the home page
-        return reverse('posts:home')
+    #     #else: go to the home page
+    #     return reverse('posts:home')
     
 class CustomLogoutView(LogoutView):
     '''Custom logout view with confirmation message.'''

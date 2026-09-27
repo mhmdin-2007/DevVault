@@ -6,6 +6,7 @@ from .models import Profile
 
 class CustomUserCreationForm(UserCreationForm):
     '''Enhanced user registration form with additional validation.'''
+    
     email = forms.EmailField(required=True, widget=forms.EmailInput(attrs={
         'class': 'form-control', 
         'placeholder': 'example@gmail.com'
