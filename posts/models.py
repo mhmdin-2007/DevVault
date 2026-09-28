@@ -42,7 +42,7 @@ class Post(models.Model):
     '''
 
     # you can view all of the following items in one place.
-    # it is desplayed using dropdown menus in the admin panel.
+    # it is displayed using dropdown menus in the admin panel.
     class PostType(models.TextChoices):
         SOCIAL = 'SOCIAL', 'social'
         INTERVIEW = 'INTERVIEW', "Interview"
@@ -172,7 +172,10 @@ class Post(models.Model):
         result = Vote.objects.filter(
             content_type=content_type,
             object_id=self.id
-        ).aggregate(total=models.Sum('vote_type'))['total']
+        ).aggregate(
+            total=models.Sum('vote_type')
+        )['total']
+        
         return result or 0
     
     @property

@@ -83,7 +83,10 @@ def like_toggle(request, content_type_id, object_id):
     Use AJAX-friendly response.
     """
     content_type = get_object_or_404(ContentType, id=content_type_id)
-    content_object = content_type.get_object_for_this_type(id=object_id)
+    content_object = get_object_or_404(
+        content_type.model_class(),
+        id=object_id
+    )
 
     like, created = Like.objects.get_or_create(
         user = request.user,
@@ -125,7 +128,12 @@ def add_comment(request, content_type_id, object_id):
     '''
 
     content_type = get_object_or_404(ContentType, id=content_type_id)
-    content_object = content_type.get_object_for_this_type(id = object_id)
+    # content_object = content_type.get_object_for_this_type(id = object_id) #old line
+    # latest version
+    content_object = get_object_or_404(
+        content_type.model_class(),
+        id = object_id
+    )
 
     form = CommentForm(request.POST)
 
@@ -161,7 +169,11 @@ def vote_toggle(request, content_type_id, object_id):
     """
 
     content_type = get_object_or_404(ContentType, id=content_type_id)
-    content_object = content_type.get_object_for_this_type(id=object_id)
+    # content_object = content_type.get_object_for_this_type(id=object_id)
+    content_object = get_object_or_404(
+        content_type.model_class(), 
+            id=object_id
+    )
 
     vote_type = request.POST.get('vote_type')
     if vote_type not in ['1', '-1']:
@@ -205,7 +217,11 @@ def bookmark_toggle(request, content_type_id, object_id):
     """ Toggle bookmark on any content."""
 
     content_type = get_object_or_404(ContentType, id=content_type_id)
-    content_object = content_type.get_object_for_this_type(id=object_id)    
+    # content_object = content_type.get_object_for_this_type(id=object_id)    
+    content_object = get_object_or_404(
+        content_type.model_class(), 
+        id=object_id
+    )    
     
     bookmark, created = Bookmark.objects.get_or_create(
         user= request.user,
