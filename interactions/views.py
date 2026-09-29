@@ -107,15 +107,15 @@ def like_toggle(request, content_type_id, object_id):
 
     # AJAX request
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-            return JsonResponse({
-                'liked': liked,
-                'total_likes': total_likes,
-            })
+        return JsonResponse({
+            'liked': liked,
+            'total_likes': total_likes,
+        })
     
     if liked:
         messages.success(request, 'Post liked!')
     else:
-        messages.info(request, 'Like removed.')
+        messages.info(request, 'Like removed!')
     
     return redirect('posts:post_detail', slug=content_object.slug)
 

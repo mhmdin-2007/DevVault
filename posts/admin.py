@@ -22,7 +22,7 @@ class AnswerInline(admin.TabularInline):
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
     list_display = [
-        'title', 'author', 'post_type', 'category',
+        'id', 'title', 'author', 'post_type', 'category',
         'difficulty', 'company', 'created_at'
     ]
     list_filter = ['post_type', 'category', 'difficulty', 'company', 'created_at']

@@ -49,9 +49,9 @@ class Notification(models.Model):
 class Like(models.Model):
     '''
     Like any content (post, answer, etc.).
-    Uses FenericForeignKey for flexible relationshiops.
+    Uses GenericForeignKey for flexible relationships.
     '''
-    #feilds
+    # fields
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -118,12 +118,12 @@ class Comment(models.Model):
     
     @property
     def is_reply(self):
-        '''Check if this comment is a reply to another commment.'''
+        '''Check if this comment is a reply to another comment.'''
         return self.parent is not None
     
     @property
     def replies_count(self):
-        '''Count of direct replies to this commnet.'''
+        '''Count of direct replies to this comment.'''
         return self.replies.count()
 
 class Vote(models.Model):
