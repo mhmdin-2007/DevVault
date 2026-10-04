@@ -1,0 +1,62 @@
+services:
+
+  db:
+    image: postgres:15-alpine
+    container_name: devvault_prod_db
+    
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+
+    volumes:
+      - postgres_prod_data:/var/lib/postgresql/data
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+    restart: unless-stopped
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    container_name: devvault_prod_web
+
+    command: /entrypoint.prod.sh
+
+    expose:
+      - "8000"
+
+    depends_on:
+      db:
+        condition: service_healthy
+
+    environment:
+      DJANGO_SETTINGS_MODULE: config.settings.production
+
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_HOST: db
+      DB_PORT: 5432
+
+      SECRET_KEY: ${SECRET_KEY}
+      ALLOWED_HOSTS: ${ALLOWED_HOSTS}
+      CSRF_TRUSTED_ORIGINS: ${CSRF_TRUSTED_ORIGINS}
+
+    volumes:
+      - static_prod_volume:/app/staticfiles
+      - media_prod_volume:/app/media
+
+    restart: unless-stopped
+
+
+volumes:
+  postgres_prod_data:
+  static_prod_volume:
+  media_prod_volume:

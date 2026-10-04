@@ -3,24 +3,31 @@ services:
   db:
     image: postgres:15-alpine
     container_name: devvault_db
+
     environment:
       POSTGRES_DB: ${DB_NAME}
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
+
     volumes:
       - postgres_data:/var/lib/postgresql/data
+
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U devvault_user -d devvault"]
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
       interval: 10s
       timeout: 5s
       retries: 5
+
     restart: unless-stopped
 
   # Django Web Application
   web:
     build: .
+
     container_name: devvault_web
+
     command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+
     volumes:
       - .:/app
       - static_volume:/app/staticfiles
@@ -30,12 +37,13 @@ services:
     depends_on:
       db:
         condition: service_healthy
+        
     environment:
       DB_NAME: ${DB_NAME}
       DB_USER: ${DB_USER}
       DB_PASSWORD: ${DB_PASSWORD}
       DB_HOST: db
-      DB_PORT: 5432
+      DB_PORT: ${DB_PORT}
     restart: unless-stopped
 
 # Volumes
