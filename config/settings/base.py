@@ -16,13 +16,13 @@ SECRET_KEY = env('SECRET_KEY')
 # Application definition
 INSTALLED_APPS = [
     'rest_framework',
-    'taggit',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes', 
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'taggit',
     # 'accounts',
     # 'posts',
     # 'interactions',
