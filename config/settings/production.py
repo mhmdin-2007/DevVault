@@ -19,7 +19,7 @@ CSRF_COOKIE_SECURE = True
 # HTTPS
 SECURE_SSL_REDIRECT = env.bool(
     "SECURE_SSL_REDIRECT",
-    default=True,
+    default=False,
 )
 
 # SECURE_HSTS_SECONDS = True
