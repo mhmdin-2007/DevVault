@@ -129,7 +129,6 @@ def add_comment(request, content_type_id, object_id):
 
     content_type = get_object_or_404(ContentType, id=content_type_id)
     # content_object = content_type.get_object_for_this_type(id = object_id) #old line
-    # latest version
     content_object = get_object_or_404(
         content_type.model_class(),
         id = object_id
