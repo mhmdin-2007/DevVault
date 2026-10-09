@@ -1,7 +1,117 @@
-<footer class="bg-dark text-white text-center py-3 mt-5">
-    <div>
-        <p class="mb-0">DevVault © 2024</p>
-        
+<footer class="devvault-footer mt-5">
+    <div class="container py-5">
+        <div class="row g-4">
 
+            <div class="col-lg-4 col-md-6">
+                <a href="{% url 'posts:home' %}" class="footer-brand text-decoration-none">
+                    <i class="fas fa-code me-2"></i>
+                    DevVault
+                </a>
+                
+                <p class="footer-description mt-3">
+                    فضایی برای اشتراک‌گذاری ایده‌ها، انتشار مطالب
+                    برنامه‌نویسی و ارتباط میان توسعه‌دهندگان.
+                </p>
+
+                <div class="footer-badge mt-3">
+                    <i class="fas fa-heart me-1"></i>
+                    ساخته‌شده با علاقه به دنیای کدنویسی
+                </div>
+
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <h5 class="footer-heading">دسترسی سریع</h5>
+
+                <ul class="footer-links list-unstyled mt-3">
+                    <li>
+                        <a href="{% url 'posts:home' %}">
+                            <i class="fas fa-angle-left"></i>
+                            صفحه اصلی
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'posts:home' %}">
+                            <i class="fas fa-angle-left"></i>
+                            مطالب و نوشته‌ها
+                        </a>
+                    </li>
+
+                    <li>
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'accounts:profile' user.username %}">
+                                <i class="fas fa-user"></i>
+                                پروفایل کاربری
+                            </a>
+                        {% else %}
+                            <a href="{% url 'accounts:login' %}">
+                                <i class="fas fa-angle-left"></i>
+                                برای عضویت کلیک کنید
+                            </a>
+                        {% endif %}
+                    </li> 
+
+                    <li>
+                        <a href="mailto:mhmdin2007@gmail.com">
+                            <i class="fas fa-angle-left"></i>
+                            ارتباط با ما
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="col-lg-4 col-md-12">
+                <h5 class="footer-heading">درباره سازنده</h5>
+
+                <div class="creator-box mt-3">
+                    <div>
+                        <div class="creator-icon">
+                            <i class="fas fa-user-astronaut"></i>
+                        </div>
+
+                        <div>
+                            <h6 class="creator-name">محمد اینانلو</h6>
+                            <p class="creator-role">
+                                توسعه‌دهنده وب و سازنده DevVault
+                            </p>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="footer-social mt-3">
+                    <a href="https://github.com/mhmdin-2007" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+
+                    <a href="https://www.linkedin.com/in/mohammad-inanloo-697a0a41b" target="_blank" rel="noopener noreferrer" 
+                        aria-label="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+
+                    <a href="mailto:mhmdin2007@gmail.com"
+                       aria-label="Email">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+
+                </div>
+            </div>
+        </div>
     </div>
-</footer>          
+
+    <hr class="footer-divider">
+
+    <div class="footer-bottom">
+        <div>
+            <span class="footer-project-name">DevVault</span>
+            <span class="footer-version">Personal Project</span>
+        </div>
+
+        <p class="mb-0">
+            © {% now "Y" %} DevVault —
+            طراحی و توسعه توسط محمد اینانلو
+        </p>
+    </div>
+
+</footer>

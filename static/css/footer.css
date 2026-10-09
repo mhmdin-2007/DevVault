@@ -1,0 +1,220 @@
+/* DevVault Footer */
+
+.devvault-footer {
+    margin-top: 3rem;
+    background: linear-gradient(135deg, #ffffff, #f5f4ff);
+    border-top: 1px solid #e8e6ff;
+    color: #495057;
+    font-size: 0.95rem;
+}
+
+.devvault-footer .container {
+    padding-top: 3rem;
+    padding-bottom: 2rem;
+}
+
+/* brand */
+
+.devvault-footer .footer-brand {
+    display: inline-flex;
+    align-items: center;
+    color: #6c63ff;
+    font-size: 1.8rem;
+    font-weight: 800;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.devvault-footer .footer-brand:hover {
+    color: #5148e5;
+}
+
+.devvault-footer .footer-description {
+    color: #6c757d;
+    max-width: 340px;
+    line-height: 1.9;
+}
+
+.devvault-footer .footer-badge {
+    display: inline-block;
+    padding: 8px 13px;
+    border-radius: 50px;
+    background: #eeecff;
+    color: #6c63ff;
+    font-size: 0.82rem;
+}
+
+/* heading */
+
+.devvault-footer .footer-heading {
+    display: inline-block;
+    padding: 8px 13px;
+    border-radius: 50px;
+    background: #eeecff;
+    color: #6c63ff;
+    font-size: 0.9rem;
+}
+
+.devvault-footer .footer-heading::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 38px;
+    height: 3px;
+    border-radius: 10px;
+    background: #6c63ff;
+}
+
+/* quick links */
+
+.devvault-footer .footer-links li {
+    margin-bottom: 13px;
+}
+
+.devvault-footer .footer-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #6c757d;
+    text-decoration: none;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.devvault-footer .footer-links a i {
+    color: #8a83ff;
+}
+
+.devvault-footer .footer-links a:hover {
+    color: #6c63ff;
+    transform: translateX(-4px);
+}
+
+/* Creator */
+.devvault-footer .creator-box {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 16px;
+    border: 1px solid #e9e7ff;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.devvault-footer .creator-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    border-radius: 14px;
+    background: #eeecff;
+    color: #6c63ff;
+    font-size: 1.3rem;
+}
+
+.devvault-footer .creator-name {
+    margin-bottom: 5px;
+    color: #292b40;
+    font-weight: 700;
+}
+
+.devvault-footer .creator-role {
+    margin-bottom: 0;
+    color: #6c757d;
+    font-size: 0.82rem;
+    line-height: 1.8;
+}
+
+/* Social links */
+.devvault-footer .footer-social {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.devvault-footer .footer-social a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border: 1px solid #e5e2ff;
+    border-radius: 13px;
+    background: #ffffff;
+    color: #6c63ff;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: all 0.2s ease;
+}
+
+.devvault-footer .footer-social a:hover {
+    transform: translateY(-3px);
+    background: #6c63ff;
+    border-color: #6c63ff;
+    color: #ffffff;
+    box-shadow: 0 6px 16px rgba(108, 99, 255, 0.2);
+}
+
+/* Divider */
+.devvault-footer .footer-divider {
+    margin: 0;
+    border-color: #dedbfa;
+    opacity: 1;
+}
+
+/* Copyright */
+.devvault-footer .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 20px max(24px, calc((100% - 1140px) / 2));
+    color: #868e96;
+    font-size: 0.82rem;
+}
+
+.devvault-footer .footer-project-name {
+    color: #6c63ff;
+    font-weight: 800;
+}
+
+.devvault-footer .footer-version {
+    margin-right: 8px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    background: #eeecff;
+    color: #6c63ff;
+    font-size: 0.72rem;
+}
+
+
+@media (max-width: 767px) {
+    .devvault-footer {
+        text-align: center;
+    }
+
+    .devvault-footer .footer-description {
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .devvault-footer .footer-heading::after {
+        right: 50%;
+        transform: translateX(50%);
+    }
+
+    .devvault-footer .creator-box,
+    .devvault-footer .footer-social {
+        justify-content: center;
+    }
+
+    .devvault-footer .footer-bottom {
+        justify-content: center;
+        flex-direction: column;
+        padding: 20px 16px;
+        text-align: center;
+    }
+}
