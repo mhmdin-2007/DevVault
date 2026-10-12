@@ -1,0 +1,252 @@
+.devvault-login {
+    color: #292b40;
+    background: transparent;
+    padding: 1rem 0;
+    margin: 0;
+    border: none;
+    box-shadow: none;
+}
+
+.devvault-login .login-wrapper {
+    width: 100%;
+    max-width: 460px;
+    margin: 0 auto;
+}
+
+.devvault-login .login-brand {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+
+.devvault-login .login-brand-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: #eeecff;
+    color: #6c63ff;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.devvault-login .login-brand-name {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: #6c63ff;
+    font-size: 1.8rem;
+    font-weight: 800;
+    text-decoration: none;
+    line-height: 1.2;
+}
+
+.devvault-login .login-brand-description {
+    margin: 7.5px 0 0;
+    color: #6c757d;
+    font-size: 0.7rem;
+    line-height: 1.5;
+}
+
+.devvault-login .login-card {
+    overflow: hidden;
+    border: 1px solid #e9e7ff;
+    border-radius: 22px;
+    background: #ffffff;
+    box-shadow: 0 16px 45px rgba(108, 99, 255, 0.09);
+}
+
+.devvault-login .login-card-header {
+    padding: 2rem 2rem 1rem;
+    text-align: center;
+}
+
+.devvault-login .login-eyebrow {
+    display: inline-block;
+    padding: 7px 12px;
+    border-radius: 50px;
+    background: #eeecff;
+    color: #6c63ff;
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.devvault-login .login-card-header h1 {
+    margin: 1rem 0 0.5rem;
+    color: #292b40;
+    font-size: 1.55rem;
+    font-weight: 800;
+}
+
+.devvault-login .login-card-header p {
+    margin: 0;
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+.devvault-login .login-card-body {
+    padding: 1.25rem 2rem 1.75rem;
+}
+
+.devvault-login .login-field {
+    margin-bottom: 1.25rem;
+}
+
+.devvault-login .login-field label {
+    display: block;
+    margin-bottom: 0.55rem;
+    color: #495057;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.devvault-login .login-input-wrap {
+    position: relative;
+}
+
+
+.devvault-login .login-input-wrap > i {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    z-index: 2;
+    color: #8a83ff;
+    transform: translateY(-50%);
+}
+
+.devvault-login .login-input-wrap input {
+    width: 100%;
+    min-height: 50px;
+    padding: 12px 42px 12px 14px;
+    border: 1px solid #e5e2ff;
+    border-radius: 12px;
+    outline: none;
+    background: #fcfbff;
+    color: #292b40;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.devvault-login .login-input-wrap input:focus {
+    border-color: #6c63ff;
+    box-shadow: 0 0 0 4px rgba(108, 99, 255, 0.12);
+}
+
+.devvault-login .login-input-wrap input::placeholder {
+    color: #adb5bd;
+}
+
+.devvault-login .login-field-error {
+    margin-top: 7px;
+    color: #dc3545;
+    font-size: 0.84rem;
+}
+
+.devvault-login .login-field-error ul {
+    margin: 0;
+    padding-right: 1.2rem;
+}
+
+.devvault-login .login-alert {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 1.25rem;
+    padding: 12px 14px;
+    border: 1px solid #f5c2c7;
+    border-radius: 12px;
+    background: #fff5f5;
+    color: #b02a37;
+    font-size: 0.88rem;
+}
+
+.devvault-login .login-alert ul {
+    margin: 0;
+    padding-right: 1.1rem;
+}
+
+.devvault-login .login-submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    min-height: 52px;
+    margin-top: 1.75rem;
+    border: 1px solid #6c63ff;
+    border-radius: 12px;
+    background: #6c63ff;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+.devvault-login .login-submit:hover {
+    transform: translateY(-2px);
+    border-color: #5148e5;
+    background: #5148e5;
+    box-shadow: 0 8px 18px rgba(108, 99, 255, 0.22);
+}
+
+.devvault-login .login-submit:focus-visible {
+    outline: 3px solid rgba(108, 99, 255, 0.35);
+    outline-offset: 3px;
+}
+
+.devvault-login .login-card-footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    padding: 1.25rem 1rem;
+    border-top: 1px solid #f0eeff;
+    background: #fcfbff;
+    color: #6c757d;
+    font-size: 0.88rem;
+}
+
+.devvault-login .login-card-footer a {
+    color: #6c63ff;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.devvault-login .login-card-footer a:hover {
+    color: #5148e5;
+    text-decoration: underline;
+}
+
+.devvault-login .login-botton-note {
+    margin: 1.5rem 0 0;
+    color: #868e96;
+    font-size: 0.82rem;
+    text-align: center;
+}
+
+@media (max-width: 480px) {
+    .devvault-login {
+        padding: 2.5rem 0.85rem;
+    }
+
+    .devvault-login .login-card-header {
+        padding: 1.5rem 1.25rem 0.75rem;
+    }
+
+    .devvault-login .login-card-header h1 {
+        font-size: 1.35rem;
+    }
+
+    .devvault-login .login-card-body {
+        padding: 1.25rem 1.25rem 1.5rem;
+    }
+
+    .devvault-login .login-brand-name {
+        font-size: 1.8rem;
+    }
+}

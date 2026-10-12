@@ -1,55 +1,111 @@
 {% extends 'base.html' %} 
 {% load static %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+
 {% block title %} Login | DevVault {% endblock %}
 
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-lg-5 col-md">
-        <div class="card shadow-lg border-0 rounded-4">
-            <div class="card-header bg-transparent border-0 pt-4 text-center">
-                <h3 class="fw-bold">Welcome Back</h3>
-                <p class="text-muted small">Sign in to continue your journey</p>
+<div class="devvault-login">
+    <div class="login-wrapper">
+        
+        <!-- <div class="login-brand">
+            <div class="login-brand-icon">
+                <i class="fas fa-code"></i>
+            </div>
+            <a href="{% url 'posts:home' %}" class="login-brand-name">DevVault</a>
+            <p class="login-brand-description">
+                your space to build, share, and grow.
+            </p>
+        </div> -->
+        
+        <div class="login-brand">
+            <a href="{% url 'posts:home' %}" class="login-brand-name">
+                <span class="login-brand-icon">
+                    <i class="fas fa-code"></i>
+                </span>
+                <span>DevVault</span>
+            </a>
+
+            <p class="login-brand-description">
+                your space to build, share, and grow
+            </p>
+        </div>
+
+        <div class="login-card">
+            
+            <div class="login-card-header">
+                <span class="login-eyebrow">WELCOME BACK</span>
+                <h1>Sing in to your account</h1>
+                <p>Enter your credentials to continue.</p>
             </div>
 
-            <div class="card-body p-4">
-                <form method="post" class="needs-validation" novalidate>
+            <div class="login-card-body">
+                {% if form.non_field_errors %}
+                    <div class="login-alert" role="alert">
+                        <i class="fas fa-circle-exclamation"></i>
+                        <div>{{ form.non_field_errors }}</div>
+                    </div>
+                {% endif %}
+
+                <form method="post" class="login-form">
                     {% csrf_token %}
 
                     {% if request.GET.next %}
-                        <input type="hidden" name="next" value="{{ request.GET.next }}">
+                        <input type="hidden" name="text" value="{{ request.GET.next }}">
                     {% endif %}
 
-                    <div class="mb-3">
-                        {{ form.username.label_tag }}
-                        {{ form.username }}
+                    <div class="login-field">
+                        <label for="{{ form.username.id_for_label }}">
+                            Username
+                        </label>
+                        <div class="login-input-wrap">
+                            <i class="fas fa-user"></i>
+                            {{ form.username }}
+                        </div>
                         {% if form.username.errors %}
-                            <div class="invalid-feedback d-block">
-                                {{ from.username.errors }}
+                            <div class="login-feild-error">
+                                {{ form.username.errors }}
                             </div>
                         {% endif %}
                     </div>
-                    <div class="mb-3">
-                        {{ form.password.label_tag }}
-                        {{ form.password }}
-                        {% if form.password.errrors %}
-                            <div class="invalid-feedback d-block">{{ form.password.errors }}</div>
+
+                    <div class="login-field">
+                        <label for="{{ form.password.id_for_label }}">
+                            Password
+                        </label>
+                        <div class="login-input-wrap">
+                            <i class="fas fa-lock"></i>
+                            {{ form.password }}
+                        </div>
+                        {% if form.password.errors %}
+                            <div class="login-feild-error">
+                                {{ form.password.errors }}
+                            </div>
                         {% endif %}
                     </div>
-                    <div class="d-grid gap-2 mt-4">
-                        <button type="submit" class="btn btn-primary btn-lg">
-                            <i class="fas fa-sign-in-alt me-2"></i>Sign In
-                        </button>
-                    </div>
+ 
+                    <button type="submit" class="login-submit">
+                        <span>Sign In</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+
                 </form>
             </div>
-            <div class="card-footer bg-transparent border-0 text-center pb-4">
-                <p class="mb-0">
-                    Don't have an account?
-                    <a href="{% url 'accounts:register' %}" class="text-decoration-none fw-bold">Register Now</a>
-                </p>
+
+            <div class="login-card-footer">
+                <span>Don't have an account?</span>
+                <a href="{% url 'accounts:register' %}">Create an account</a>
             </div>
         </div>
-    </div>
+
+        <p class="login-botton-note">
+            Build for developers, by developers.
+        </p>
+
+    </div>  
 </div>
 {% endblock %}
+{% block footer %}{% endblock %}
