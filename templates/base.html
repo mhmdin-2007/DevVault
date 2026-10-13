@@ -20,7 +20,10 @@
     {% include 'partials/navbar.html' %}
     
     <main class="container py-4">
+        {% block messages %}
         {% include 'partials/messages.html' %}
+        {% endblock %}
+
         {% block content %}
         {% endblock %}
     </main>

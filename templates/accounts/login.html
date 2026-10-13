@@ -7,6 +7,8 @@
 
 {% block title %} Login | DevVault {% endblock %}
 
+{% block messages %}{% endblock %}
+
 {% block content %}
 <div class="devvault-login">
     <div class="login-wrapper">
@@ -38,7 +40,7 @@
             
             <div class="login-card-header">
                 <span class="login-eyebrow">WELCOME BACK</span>
-                <h1>Sing in to your account</h1>
+                <h1>Sign in to your account</h1>
                 <p>Enter your credentials to continue.</p>
             </div>
 
@@ -54,7 +56,7 @@
                     {% csrf_token %}
 
                     {% if request.GET.next %}
-                        <input type="hidden" name="text" value="{{ request.GET.next }}">
+                        <input type="hidden" name="next" value="{{ request.GET.next }}">
                     {% endif %}
 
                     <div class="login-field">
@@ -66,12 +68,11 @@
                             {{ form.username }}
                         </div>
                         {% if form.username.errors %}
-                            <div class="login-feild-error">
+                            <div class="login-field-error">
                                 {{ form.username.errors }}
                             </div>
                         {% endif %}
                     </div>
-
                     <div class="login-field">
                         <label for="{{ form.password.id_for_label }}">
                             Password
@@ -81,7 +82,7 @@
                             {{ form.password }}
                         </div>
                         {% if form.password.errors %}
-                            <div class="login-feild-error">
+                            <div class="login-field-error">
                                 {{ form.password.errors }}
                             </div>
                         {% endif %}
