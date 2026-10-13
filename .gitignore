@@ -21,3 +21,6 @@ build/
 dist/
 *.egg-info/
 *.log
+*.py.bak
+*.py.back
+*.py.backup
