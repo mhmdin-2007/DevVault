@@ -1,272 +1,316 @@
+::: {align="center"}
 # DevVault
 
-[![Python Version](https://img.shields.io/badge/python-3.11+-blue.svg)](https://python.org)
-[![Django Version](https://img.shields.io/badge/django-5.1.4-green.svg)](https://djangoproject.com)
-[![PostgreSQL](https://img.shields.io/badge/postgresql-15+-blue.svg)](https://postgresql.org)
-[![Docker](https://img.shields.io/badge/docker-27+-blue.svg)](https://docker.com)
-[![License](https://img.shields.io/badge/license-BSD_3--Clause-red.svg)](LICENSE)
+### A Community Platform for Developers
 
-> A community-driven platform for software engineers to share interview questions, algorithm challenges, and technical knowledge.
+**Technical knowledge · Interview preparation · Developer
+collaboration**
 
-DevVault is a Django-based web platform designed around **technical learning, interview preparation, and developer collaboration**.
+[![Live
+Website](https://img.shields.io/badge/Live%20Website-devvault.ir-6C63FF?style=for-the-badge&logo=google-chrome&logoColor=white)](https://devvault.ir)
 
-The platform allows developers to share technical content, discuss programming problems, interact with other developers, and organize useful resources for future reference.
+[![Django](https://img.shields.io/badge/Django-Web%20Framework-092E20?style=flat-square&logo=django&logoColor=white)](https://www.djangoproject.com/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Database-4169E1?style=flat-square&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![Docker](https://img.shields.io/badge/Docker-Containers-2496ED?style=flat-square&logo=docker&logoColor=white)](https://www.docker.com/)
+[![Nginx](https://img.shields.io/badge/Nginx-Web%20Server-009639?style=flat-square&logo=nginx&logoColor=white)](https://nginx.org/)
+[![Bootstrap](https://img.shields.io/badge/Bootstrap-CSS%20Framework-7952B3?style=flat-square&logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
 
----
+[Open Live Website](https://devvault.ir) · [Source
+Code](https://github.com/mhmdin-2007/DevVault)
+:::
 
-## 📖 Table of Contents
+------------------------------------------------------------------------
 
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Project Structure](#project-structure)
-- [Getting Started](#getting-started)
-- [Installation with Docker](#installation-with-docker)
-- [Environment Variables](#environment-variables)
-- [Database](#database)
-- [API](#api)
-- [Future Improvements](#future-improvements)
-- [Contributing](#contributing)
-- [License](#license)
-- [Author](#author)
+## Overview
 
----
+**DevVault** is a Django-based platform for sharing programming
+knowledge, exploring interview questions, and engaging with technical
+content.
 
-##  Features
+Unlike a local-only demo, DevVault has a public deployment at
+**[devvault.ir](https://devvault.ir)**. This lets visitors explore the
+running application and review the implementation in the source
+repository.
 
-### 👤 Authentication & Profiles
+> **Live application:** <https://devvault.ir>
 
-* User registration and login with validation
-* Developer profiles with avatar, bio, and social links
-* Follow / unfollow developers
+## Project Overview
 
-### 📝 Content Management
+**DevVault** is a web platform built to bring developer knowledge,
+technical discussions, and interview preparation into one place. It
+gives developers a space to explore technical content, share ideas, and
+engage with programming questions.
 
-* Multiple content types:
+The project is more than a local demo: it has a public website deployed
+at **[devvault.ir](https://devvault.ir)**. The repository documents the
+application's codebase and the technologies used to run it.
 
-  * Social posts
-  * Interview questions
-  * Articles
-* Image and video support
-* Company and tag categorization
-* SEO-friendly slug-based URLs
+> **Try the live application:** <https://devvault.ir>
 
-### 💬 Community Interaction
+## At a Glance
 
-* Likes on posts and answers
-* Nested comments and replies
-* Upvote / downvote system
-* Bookmarking
-* Answers to interview questions
-* Answer acceptance by the question author
-* File uploads for programming answers such as `.py` and `.cpp`
+  ---------------------------------- ----------------------------------
+  **Project type**                   Full-stack web application
 
-### 🔎 Search & Filtering
+  **Backend**                        Python · Django
 
-* Full-text search across titles and content
-* Filtering by:
+  **Database**                       PostgreSQL
 
-  * Post type
-  * Category
-  * Difficulty
-  * Company
-  * Tags
-* Pagination for large result sets
+  **Web server / reverse proxy**     Nginx
 
-### 🐳 Dockerized Development
+  **Deployment**                     Docker · Docker Compose
 
-* Docker-based development environment
-* Docker Compose configuration
-* PostgreSQL database
-* Persistent database volumes
-* Simple project setup
+  **Frontend**                       Django Templates · Bootstrap ·
+                                     HTML · CSS · JavaScript
 
----
+  **Status**                         Public website deployed
+  ---------------------------------- ----------------------------------
 
-##  Tech Stack
+## Core Capabilities
 
-### Backend
+> Keep this list aligned with the features currently implemented in the
+> production version.
 
-| Technology        | Version | Purpose                   |
-| ----------------- | ------: | ------------------------- |
-| Python            |   3.11+ | Programming language      |
-| Django            |   5.1.4 | Web framework             |
-| PostgreSQL        |     15+ | Database                  |
-| Django ORM        |       — | Database abstraction      |
-| GenericForeignKey |       — | Polymorphic relationships |
+-   **Accounts and profiles** --- user registration, authentication, and
+    profile information.
+-   **Technical content** --- create and explore posts, articles, and
+    interview questions.
+-   **Community interaction** --- likes, comments, replies, bookmarks,
+    and voting where implemented.
+-   **Interview preparation** --- organize technical questions with
+    supported categories, difficulty levels, company names, or tags.
+-   **Discovery** --- search, filter, and browse content with
+    pagination.
+-   **Code submissions and attachments** --- support for programming
+    answers and file uploads where enabled.
 
-### Frontend
+## Technology & Deployment
 
-| Technology       | Version | Purpose               |
-| ---------------- | ------: | --------------------- |
-| Bootstrap        |     5.3 | UI framework          |
-| Font Awesome     |     6.4 | Icons                 |
-| Django Templates |       — | Server-side rendering |
+DevVault uses a conventional Django application stack, with
+containerized services to make deployment and service configuration more
+repeatable.
 
-### DevOps & Tools
+  Technology                  Role
+  --------------------------- -------------------------------------------------
+  **Python**                  Primary programming language
+  **Django**                  Server-side web framework and application logic
+  **PostgreSQL**              Relational database
+  **Nginx**                   Production web server / reverse proxy
+  **Docker**                  Containerization
+  **Docker Compose**          Multi-service orchestration
+  **Bootstrap**               Responsive UI components
+  **HTML, CSS, JavaScript**   Frontend structure and behavior
+  **Font Awesome**            Icons
+  **Git & GitHub**            Version control and source hosting
+  **Linux server**            Production hosting environment
 
-| Technology     | Purpose                     |
-| -------------- | --------------------------- |
-| Docker         | Containerization            |
-| Docker Compose | Multi-container development |
-| Git            | Version control             |
+The exact versions and any additional services should be verified
+against the repository's dependency files and deployment configuration
+before release.
 
----
+## Architecture at a Glance
 
-## Project Structure
-
-```text
-DevVault/
-├── accounts/          # Authentication and user profiles
-├── config/            # Django project configuration
-├── interactions/      # Likes, comments, votes and bookmarks
-├── posts/             # Posts, articles and interview content
-├── static/            # Static assets
-├── staticfiles/       # Collected static files
-├── templates/         # Django templates
-├── Dockerfile
-├── docker-compose.yml
-├── manage.py
-├── requirements.txt
-└── README.md
+``` text
+                         Visitors
+                            |
+                            v
+                     Public Website
+                      devvault.ir
+                            |
+                            v
+                    Nginx / Reverse Proxy
+                            |
+                            v
+                    Django Application
+                            |
+                            v
+                       PostgreSQL
 ```
 
----
+This is a high-level view of the production stack. Adapt it if the
+actual Nginx, application, or database topology differs from this
+diagram.
 
-## Getting Started
+## Repository Structure
 
-### Prerequisites
+``` text
+DevVault/
+├── accounts/                  # Account and profile features
+├── config/                    # Django project and settings
+├── interactions/              # Community interaction features
+├── posts/                     # Posts and technical content
+├── static/                    # Static source assets
+├── templates/                 # Django templates
+├── docker/
+│   └── nginx/                 # Nginx configuration, if present
+├── Dockerfile
+├── docker-compose.yml
+├── docker-compose.prod.yml
+├── manage.py
+└── requirements.txt
+```
 
-Make sure you have the following installed:
+Directory names can change between branches. Confirm this tree against
+the current repository before publishing.
 
-* Git
-* Python 3.11+
-* Docker
-* Docker Compose
+## Run Locally
 
-PostgreSQL 15+ is required when running the project without Docker.
+### Requirements
 
----
-
-## Installation with Docker
+-   Git
+-   Docker Engine
+-   Docker Compose
 
 ### 1. Clone the repository
 
-```bash
+``` bash
 git clone https://github.com/mhmdin-2007/DevVault.git
 cd DevVault
 ```
 
-### 2. Create the environment file
+### 2. Configure the environment
 
-```bash
+If the repository includes an example environment file, copy it:
+
+``` bash
 cp .env.example .env
 ```
 
-Configure the required environment variables inside `.env`.
+Otherwise, create the required environment file based on the variables
+referenced by the Compose and Django settings files. Do not commit
+secrets or production credentials.
 
-### 3. Build and start the containers
+### 3. Build and start the services
 
-```bash
-docker-compose up -d
+``` bash
+docker compose up -d --build
 ```
 
-### 4. Run database migrations
+### 4. Run migrations
 
-```bash
-docker exec -it devvault_web bash
-python manage.py migrate
+Replace `<django-service>` with the service name defined in
+`docker-compose.yml`:
+
+``` bash
+docker compose exec <django-service> python manage.py migrate
 ```
 
-### 5. Create a superuser
+### 5. Create an admin user
 
-```bash
-python manage.py createsuperuser
+``` bash
+docker compose exec <django-service> python manage.py createsuperuser
 ```
 
-### 6. Open the application
+### 6. Open the local site
 
-```text
+Use the host and port configured in Compose. A common local address is:
+
+``` text
 http://localhost:8000
 ```
 
-Admin panel:
+If the Compose file maps a different port, use the configured address
+instead.
 
-```text
-http://localhost:8000/admin
+## Production Deployment
+
+The repository has a separate production Compose configuration. The
+production deployment command used for this project is:
+
+``` bash
+docker compose --env-file .env.production -f docker-compose.prod.yml up -d --build
 ```
 
----
+Before deploying, verify environment values and confirm that the
+production configuration includes the expected settings for:
 
-## Environment Variables
+-   `DEBUG=False` and a secure Django secret key
+-   `ALLOWED_HOSTS` and CSRF trusted origins
+-   PostgreSQL credentials and persistent storage
+-   Nginx routing and static-file delivery
+-   HTTPS and production security settings
 
-Sensitive configuration should be stored in `.env` and should not be committed to the repository.
+Run production commands only on the intended server and after reviewing
+the configuration.
 
-Use `.env.example` as a template for local configuration.
+## Google Search & Public Availability
 
----
+DevVault has a public website at **[devvault.ir](https://devvault.ir)**.
+If the site is appearing in Google Search, that can be highlighted as an
+additional milestone---but search visibility and ranking should only be
+claimed after checking the actual results or Google Search Console.
 
-## Database
+To check public indexing, search Google for:
 
-DevVault uses **PostgreSQL** as its primary database and Django ORM for database interaction.
+``` text
+site:devvault.ir
+```
 
-The project also uses Django's relational modeling capabilities to manage relationships between users, posts, comments, answers, votes, bookmarks, and other entities.
+For an authoritative status of indexing, use Google Search Console's URL
+Inspection tool. A public website being online does not, by itself,
+guarantee that Google has indexed it.
 
----
+## Configuration & Security
 
-##  API
+-   Keep credentials and secret keys out of version control.
+-   Use a unique production `SECRET_KEY`.
+-   Disable Django debug mode in production.
+-   Restrict allowed hosts and database access.
+-   Use HTTPS for the public site.
+-   Back up persistent database data before risky maintenance or
+    migrations.
 
-The project includes **REST API** endpoints built with **Django REST Framework**.
+## Testing
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/posts/` | List all posts |
-| POST | `/api/posts/` | Create a new post |
-| GET | `/api/posts/{id}/` | Retrieve a post |
-| PUT | `/api/posts/{id}/` | Update a post |
-| DELETE | `/api/posts/{id}/` | Delete a post |
-| GET | `/api/users/` | List all users |
-| GET | `/api/users/{id}/` | Retrieve a user |
+Run the checks that are configured for the current codebase. A standard
+Django test command is:
 
----
+``` bash
+python manage.py test
+```
 
-##  Future Improvements
+If running inside Docker, execute it through the actual Django Compose
+service. Add specific test, lint, or formatting commands only if they
+are configured and maintained in the repository.
 
-Potential future improvements include:
+## API Documentation
 
-* Automated testing and increased test coverage
-* API documentation
-* UI/UX With professional Design 
-* CI/CD pipeline
-* Production deployment
-* Performance optimization
-* Additional developer-focused features
+List API routes here only if they are implemented in the current branch.
+For each route, document the HTTP method, path, authentication
+requirements, request parameters, response format, and a short example.
 
----
+Do not assume Django REST Framework or specific `/api/` endpoints are
+available without confirming them in the codebase.
 
-##  License
+## Contributing
 
-This project is licensed under the **BSD 3-Clause License**.
+Contributions and constructive feedback are welcome.
 
----
-##  Contributing
+1.  Create a focused branch for your change.
+2.  Follow the existing code style.
+3.  Run relevant checks.
+4.  Explain the change and any configuration updates in your pull
+    request.
 
-Contributions are welcome! Here's how you can help:
+## License
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/your-feature`)
-3. Commit your changes (`git commit -m 'Add new feature: your-feature'`)
-4. Push to the branch (`git push origin feature/your-feature`)
-5. Open a Pull Request
+Confirm the license against the `LICENSE` file in the repository. If the
+project uses the BSD 3-Clause License, link that file here.
 
-### Code Style
-- Follow **PEP 8** for Python code
-- Use **Class-Based Views** where possible
-- Write **docstrings** for functions and classes
-- Keep **templates** clean and organized
-##  Author
+## Author
 
 **Mohammad Inanloo**
 
-* GitHub: [@mhmdin-2007](https://github.com/mhmdin-2007)
-* LinkedIn: [Mohammad Inanloo](https://www.linkedin.com/in/mohammad-inanloo-697a0a41/)
-* Email: [mhmdin2007@gmail.com](mailto:mhmdin2007@gmail.com)
+-   **GitHub:** [@mhmdin-2007](https://github.com/mhmdin-2007)
+-   **LinkedIn:** [Mohammad
+    Inanloo](https://www.linkedin.com/in/mohammad-inanloo-697a0a41/)
+-   **Email:** <mhmdin2007@gmail.com>
+
+------------------------------------------------------------------------
+
+::: {align="center"}
+**Explore DevVault**
+
+[devvault.ir](https://devvault.ir) · [Source code on
+GitHub](https://github.com/mhmdin-2007/DevVault)
+:::
