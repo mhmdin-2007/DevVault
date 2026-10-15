@@ -1,4 +1,5 @@
-::: {align="center"}
+<div align="center">
+
 # DevVault
 
 ### A Community Platform for Developers
@@ -17,7 +18,8 @@ Website](https://img.shields.io/badge/Live%20Website-devvault.ir-6C63FF?style=fo
 
 [Open Live Website](https://devvault.ir) · [Source
 Code](https://github.com/mhmdin-2007/DevVault)
-:::
+
+</div>
 
 ------------------------------------------------------------------------
 
@@ -307,10 +309,11 @@ project uses the BSD 3-Clause License, link that file here.
 -   **Email:** <mhmdin2007@gmail.com>
 
 ------------------------------------------------------------------------
+<div align="center">
 
-::: {align="center"}
 **Explore DevVault**
 
 [devvault.ir](https://devvault.ir) · [Source code on
 GitHub](https://github.com/mhmdin-2007/DevVault)
-:::
+
+</div>
