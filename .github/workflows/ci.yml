@@ -1,0 +1,77 @@
+```yaml
+name: DevVault CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Django checks and tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    services:
+      postgres:
+        image: postgres:15-alpine
+        env:
+          POSTGRES_DB: devvault_test
+          POSTGRES_USER: devvault_user
+          POSTGRES_PASSWORD: ci_test_password
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U devvault_user -d devvault_test"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      SECRET_KEY: ci-only-not-a-production-secret
+      DEBUG: "False"
+      ALLOWED_HOSTS: localhost,127.0.0.1
+      DB_NAME: devvault_test
+      DB_USER: devvault_user
+      DB_PASSWORD: ci_test_password
+      DB_HOST: 127.0.0.1
+      DB_PORT: "5432"
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+
+      - name: Check installed dependencies
+        run: python -m pip check
+
+      - name: Check Django configuration
+        run: python manage.py check
+
+      - name: Check migration files
+        run: python manage.py makemigrations --check --dry-run
+
+      - name: Run tests
+        run: python manage.py test
+```
